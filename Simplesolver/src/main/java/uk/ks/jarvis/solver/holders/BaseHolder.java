@@ -23,9 +23,9 @@ import java.util.List;
 public class BaseHolder extends View implements View.OnTouchListener, View.OnLongClickListener {
 
     private final Context context;
-    Point touchCoordinates = new Point(0f, 0f);
-    Point downCoordinates = new Point(0f, 0f);
-    boolean thereAreTouchedFigures = false;
+    private Point touchCoordinates = new Point(0f, 0f);
+    private Point downCoordinates = new Point(0f, 0f);
+    private boolean thereAreTouchedFigures = false;
     private boolean isTouchedShape;
     private FragmentActivity activity;
     private List<ShapeList> shapes = new ArrayList<ShapeList>();
@@ -69,7 +69,10 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
                 touchCoordinates.setX(motionEvent.getX());
                 touchCoordinates.setY(motionEvent.getY());
 
-                if (createFigureMode) CreateNewFigureInCreateFigureMode(motionEvent);
+
+                if (createFigureMode) {
+                    CreateNewFigureInCreateFigureMode(motionEvent);
+                }
 
                 isLongClick = true;
                 moveTouchedFigureToFirstPosition();
@@ -78,7 +81,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             case MotionEvent.ACTION_MOVE:
                 touchCoordinates.setX(motionEvent.getX());
                 touchCoordinates.setY(motionEvent.getY());
-                if ((!downCoordinates.almostEquals(touchCoordinates)) && isLongClick) {
+                if ((!downCoordinates.nearlyEquals(touchCoordinates)) && isLongClick) {
                     isLongClick = false;
                 }
 
@@ -112,11 +115,11 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             ((Line) createShape).getPoint2().setX(motionEvent.getX());
             ((Line) createShape).getPoint2().setY(motionEvent.getY());
         } else if (((createShape.getClass()) == (Circle.class))) {
-            ((Circle) createShape).getCenterPoint().setX(motionEvent.getX());
-            ((Circle) createShape).getCenterPoint().setY(motionEvent.getY());
+            ((Circle) createShape).getCoordinatesOfCenterPoint().setX(motionEvent.getX());
+            ((Circle) createShape).getCoordinatesOfCenterPoint().setY(motionEvent.getY());
         } else if (((createShape.getClass()) == (Dot.class))) {
-            ((Dot) createShape).getPoint().setX(motionEvent.getX());
-            ((Dot) createShape).getPoint().setY(motionEvent.getY());
+            ((Dot) createShape).getCoordinatesPoint().setX(motionEvent.getX());
+            ((Dot) createShape).getCoordinatesPoint().setY(motionEvent.getY());
         }
         ShapeList listOfShapes = new ShapeList(createShape);
         addShape(listOfShapes);
@@ -155,7 +158,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     }
 
     public void addShape(ShapeList shapeList) {
-        shapes.add(0, shapeList);
+        shapes.add(FIRST_SHAPE_IN_LIST, shapeList);
     }
 
     public void unMergeAllFigures(ShapeList shapeList) {
@@ -202,6 +205,9 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             paint.setStrokeWidth(4);
             shapes.get(FIRST_SHAPE_IN_LIST).draw(canvas, paint);
         }
+        if (shapes.size() > 0) {
+            canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 10, 10, p);
+        }
     }
 
     @Override
@@ -236,10 +242,6 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
         }
         return null;
     }
-
-//    public Shape getCreateFigureMode() {
-//        return createFigureMode;
-//    }
 
     public void setCreateFigureMode(Shape createShape) {
         createFigureMode = true;

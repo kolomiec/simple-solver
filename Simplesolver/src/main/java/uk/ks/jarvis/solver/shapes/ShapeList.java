@@ -3,7 +3,7 @@ package uk.ks.jarvis.solver.shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import uk.ks.jarvis.solver.beans.Point;
-import uk.ks.jarvis.solver.utils.RandomColor;
+import uk.ks.jarvis.solver.utils.StaticData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ public class ShapeList {
 
     public ShapeList(Shape shape) {
         shapeList.add(shape);
-        color = RandomColor.getRandomColor();
+        color = StaticData.getRandomColor();
     }
 
     public void setRandomColor() {
         if (shapeList.size() == 1){
-            shapeList.get(0).setColor(RandomColor.getRandomColor());
+            shapeList.get(0).setColor(StaticData.getRandomColor());
         } else
-        color = RandomColor.getRandomColor();
+        color = StaticData.getRandomColor();
     }
 
     public boolean checkTouch(Shape shape1, Shape shape2) {
@@ -102,8 +102,8 @@ public class ShapeList {
             delta.setX(((Line) shapeList.get(count)).getPoint1().getX() - ((Line) shapeList.get(count)).getDrawedPoint1().getX());
             delta.setY(((Line) shapeList.get(count)).getPoint1().getY() - ((Line) shapeList.get(count)).getDrawedPoint1().getY());
         } else if (shapeList.get(count).getClass() == (Circle.class)) {
-            delta.setX(((Circle) shapeList.get(count)).getCenterPoint().getX() - ((Circle) shapeList.get(count)).getDrawedCenterPoint().getX());
-            delta.setY(((Circle) shapeList.get(count)).getCenterPoint().getY() - ((Circle) shapeList.get(count)).getDrawedCenterPoint().getY());
+            delta.setX(((Circle) shapeList.get(count)).getCoordinatesOfCenterPoint().getX() - ((Circle) shapeList.get(count)).getDrawedCenterPoint().getX());
+            delta.setY(((Circle) shapeList.get(count)).getCoordinatesOfCenterPoint().getY() - ((Circle) shapeList.get(count)).getDrawedCenterPoint().getY());
         }
         int count1 = 0;
         for (Shape shape : this.shapeList) {
@@ -130,5 +130,9 @@ public class ShapeList {
 
     public List<Shape> getShapeArray() {
         return shapeList;
+    }
+    @Override
+    public String toString(){
+        return shapeList.get(0).toString();
     }
 }

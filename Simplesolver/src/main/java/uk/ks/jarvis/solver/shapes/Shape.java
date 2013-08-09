@@ -12,7 +12,7 @@ public interface Shape {
 
     public void draw(Canvas c, Paint p);
 
-    public void move(Point point, boolean manyFigures);
+    public void move(Point point, boolean onlyMove);
 
     public boolean isTouched(Point point);
 

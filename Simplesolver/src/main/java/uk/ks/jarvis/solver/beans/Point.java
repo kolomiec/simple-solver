@@ -39,8 +39,8 @@ public class Point {
         return this.getX().equals(that.getX()) && this.getY().equals(that.getY());
     }
 
-    public boolean almostEquals(Point point) {
-        int delta = 6;
+    public boolean nearlyEquals(Point point) {
+        int delta = 8;
         return (point.getX() < this.getX() + delta) && (point.getX() > this.getX() - delta) &&
                (point.getY() < this.getY() + delta) && (point.getY() > this.getY() - delta);
     }
