@@ -45,7 +45,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return "x:" + centerPoint.getX() + ", y:" + centerPoint.getY() + ", radius:" + radius;
+        return "x:" + Math.round(drawedCenterPoint.getX()) + ", y:" + Math.round(drawedCenterPoint.getY()) + ", radius:" + Math.round(radius);
     }
 
     @Override
@@ -95,6 +95,35 @@ public class Circle implements Shape {
     }
 
     @Override
+    public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
+        Point initialPoint = new Point(drawedCenterPoint);
+        Point changedPoint = new Point(drawedCenterPoint);
+        if (radius * 2 > maxX) {
+            radius = (maxX) / 2;
+        } else if (radius * 2 > maxY - 2) {
+            radius = (maxY) / 2;
+        }
+        if (drawedCenterPoint.getX() + radius > maxX) {
+            changedPoint.setX(maxX - (float) radius);
+        } else if (drawedCenterPoint.getX() - radius < 0) {
+            changedPoint.setX((float) radius);
+        }
+
+        if (drawedCenterPoint.getY() + radius > maxY) {
+            changedPoint.setY(maxY - (float) radius);
+        } else if (drawedCenterPoint.getY() - radius < 0) {
+            changedPoint.setY((float) radius);
+        }
+        return new Point(initialPoint.getX()-changedPoint.getX(),initialPoint.getY()-changedPoint.getY());
+    }
+
+    @Override
+    public void changeCoordinatesToDelta(Point delta) {
+        drawedCenterPoint.setX(drawedCenterPoint.getX()-delta.getX());
+        drawedCenterPoint.setY(drawedCenterPoint.getY()-delta.getY());
+    }
+
+    @Override
     public boolean isTouched(Point point) {
         radiusChangeMode = false;
         setPoint(lastTouchCoordinates, point);
@@ -115,7 +144,7 @@ public class Circle implements Shape {
 
         if (((length1) < (length2 + 15)) && ((length1) > (length2 - 15))) {
             this.getCoordinates(circle.getCoordinatesOfCenterPoint());
-            Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, circle.getCoordinatesOfCenterPoint(), length2);
+            Point newCoordinates = new Point(getCoordinatesOfBorderOfCircle(centerPoint, circle.getCoordinatesOfCenterPoint(), length2));
             setPoint(drawedCenterPoint, newCoordinates);
             return true;
         }
@@ -128,10 +157,8 @@ public class Circle implements Shape {
         if (line.isLineTouched(p)) {
             double length = StaticData.getLengthBetweenTwoPoints(p, this.getCoordinatesOfCenterPoint());
             if (((length) < (this.radius + 15)) && ((length) > (this.radius - 15))) {
-                Point delta = this.getCoordinates(p);
-                delta.setX(p.getX() - delta.getX());
-                delta.setY(p.getY() - delta.getY());
-
+                Point delta = new Point(this.getCoordinates(p));
+                setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
                 setPoint(drawedCenterPoint, centerPoint.getX() + delta.getX(), centerPoint.getY() + delta.getY());
                 return true;
             }

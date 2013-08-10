@@ -26,4 +26,8 @@ public interface Shape {
 
     public void setColor(int color);
 
+    public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX,float maxY);
+
+    public void changeCoordinatesToDelta(Point delta);
+
 }

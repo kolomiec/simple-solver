@@ -16,7 +16,7 @@ public class Line implements Shape {
     private final String label1;
     private final String label2;
     public int color = 0;
-    int numberTouchedPoint = 0;
+    public  int numberTouchedPoint = 0;
     Point lastTouchCoordinates = new Point(0f, 0f);
     Point deltaTouchCoordinates = new Point(0f, 0f);
     private Point point1;
@@ -53,7 +53,7 @@ public class Line implements Shape {
 
     @Override
     public String toString() {
-        return "x1:" + point1.getX() + ", y1:" + point1.getY() + "x2:" + point2.getX() + ", y2:" + point2.getY();
+        return "x1:" + Math.round(point1.getX()) + ", y1:" + Math.round(point1.getY()) + ", x2:" + Math.round(point2.getX()) + ", y2:" + Math.round(point2.getY());
     }
 
     @Override
@@ -189,10 +189,8 @@ public class Line implements Shape {
 
     @Override
     public void refreshCoordinates() {
-        point1.setX(drawedPoint1.getX());
-        point1.setY(drawedPoint1.getY());
-        point2.setX(drawedPoint2.getX());
-        point2.setY(drawedPoint2.getY());
+        setPoint(point1, drawedPoint1);
+        setPoint(point2, drawedPoint2);
     }
 
     public boolean isLineTouched(Point point) {
@@ -239,6 +237,53 @@ public class Line implements Shape {
         this.color = color;
     }
 
+    @Override
+    public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
+        switch (this.getNumberOfSelectedPoint()) {
+            case 0:
+                Point delta01 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint1, maxX, maxY);
+                Point delta02 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint2, maxX, maxY);
+                //                setPoint(drawedPoint1, drawedPoint1.getX() - delta01.getX(), drawedPoint1.getY() - delta01.getY());
+//                setPoint(drawedPoint2, drawedPoint2.getX() - delta01.getX(), drawedPoint2.getY() - delta01.getY());
+//                setPoint(drawedPoint1, drawedPoint1.getX() - delta02.getX(), drawedPoint1.getY() - delta02.getY());
+//                setPoint(drawedPoint2, drawedPoint2.getX() - delta02.getX(), drawedPoint2.getY() - delta02.getY());
+//                Point delta = new Point(drawedPoint1.getX();sumDelta.getX());
+                return new Point(delta01.getX() + delta02.getX(), delta01.getY() + delta02.getY());
+            case 1:
+                Point delta1 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint1, maxX, maxY);
+                setPoint(drawedPoint1, drawedPoint1.getX() - delta1.getX(), drawedPoint1.getY() - delta1.getY());
+                return null;
+            case 2:
+                Point delta2 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint2, maxX, maxY);
+                setPoint(drawedPoint2, drawedPoint2.getX() - delta2.getX(), drawedPoint2.getY() - delta2.getY());
+                return null;
+        }
+        return null;
+    }
+
+    @Override
+    public void changeCoordinatesToDelta(Point delta) {
+        drawedPoint1.setX(drawedPoint1.getX()-delta.getX());
+        drawedPoint1.setY(drawedPoint1.getY()-delta.getY());
+        drawedPoint2.setX(drawedPoint2.getX()-delta.getX());
+        drawedPoint2.setY(drawedPoint2.getY()-delta.getY());
+    }
+
+    public Point setDotThatItWillNotBeOutsideTheScreen(Point point, float maxX, float maxY) {
+        Point pointForChange = new Point(point);
+        if (pointForChange.getX() > maxX) {
+            pointForChange.setX(maxX);
+        } else if (pointForChange.getX() < 0) {
+            pointForChange.setX(0f);
+        }
+        if (pointForChange.getY() > maxY) {
+            pointForChange.setY(maxY);
+        } else if (pointForChange.getY() < 0) {
+            pointForChange.setY(0f);
+        }
+        return new Point(point.getX() - pointForChange.getX(), point.getY() - pointForChange.getY());
+    }
+
     public void changePointCoordinates(Point point1, Point touchCoordinates) {
         deltaTouchCoordinates.setX(lastTouchCoordinates.getX() - touchCoordinates.getX());
         deltaTouchCoordinates.setY(lastTouchCoordinates.getY() - touchCoordinates.getY());
@@ -261,10 +306,10 @@ public class Line implements Shape {
         bigLineLength = (float) StaticData.getLengthBetweenTwoPoints(this.point1, this.point2);
 
         float ao = (float) ((Math.pow(firstLineLength, 2) - Math.pow(secondLineLength, 2) + Math.pow(bigLineLength, 2)) / (2 * bigLineLength));
-        float coef = bigLineLength / ao;
+        float coefficient = bigLineLength / ao;
         Point dotCoordinates = new Point(0f, 0f);
-        dotCoordinates.setX(((point2.getX() - point1.getX()) / coef) + point1.getX());
-        dotCoordinates.setY(((point2.getY() - point1.getY()) / coef) + point1.getY());
+        dotCoordinates.setX(((point2.getX() - point1.getX()) / coefficient) + point1.getX());
+        dotCoordinates.setY(((point2.getY() - point1.getY()) / coefficient) + point1.getY());
         return dotCoordinates;
     }
 }

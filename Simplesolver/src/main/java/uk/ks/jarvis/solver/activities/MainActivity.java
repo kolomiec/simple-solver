@@ -2,16 +2,19 @@ package uk.ks.jarvis.solver.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import uk.ks.jarvis.solver.CoordinatePlane.SystemInformation;
 import uk.ks.jarvis.solver.R;
 
 public class MainActivity extends FragmentActivity implements View.OnTouchListener, View.OnLongClickListener {
-
+    private DisplayMetrics displayMetrics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSystemInformation();
         setContentView(R.layout.activity_main);
     }
 
@@ -30,5 +33,10 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
     @Override
     public boolean onLongClick(View v) {
         return true;
+    }
+    private void setSystemInformation() {
+        displayMetrics = getBaseContext().getResources().getDisplayMetrics();
+        SystemInformation.DISPLAY_WIDTH = displayMetrics.widthPixels;
+        SystemInformation.DISPLAY_HEIGHT = displayMetrics.heightPixels;
     }
 }

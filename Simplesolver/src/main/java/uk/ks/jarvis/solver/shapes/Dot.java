@@ -37,7 +37,7 @@ public class Dot implements Shape {
 
     @Override
     public String toString() {
-        return "x:" + point.getX() + ", y:" + point.getY();
+        return "x:" + Math.round(point.getX()) + ", y:" + Math.round(point.getY());
     }
 
     @Override
@@ -67,6 +67,16 @@ public class Dot implements Shape {
     @Override
     public void setColor(int color) {
         this.color = color;
+    }
+
+    @Override
+    public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
+        return null;
+    }
+
+    @Override
+    public void changeCoordinatesToDelta(Point delta) {
+
     }
 
     @Override

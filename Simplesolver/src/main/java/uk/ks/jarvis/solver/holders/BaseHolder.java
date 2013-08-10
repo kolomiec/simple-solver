@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+import uk.ks.jarvis.solver.CoordinatePlane.CoordinateSystem;
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.fragments.CreateFigureDialog;
 import uk.ks.jarvis.solver.fragments.ShapeDialog;
@@ -34,6 +35,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     private boolean isLongClick;
     private boolean createFigureMode;
     private Shape createShape;
+    private CoordinateSystem coordinateSystem;
 
     public BaseHolder(Context context) {
         super(context);
@@ -50,6 +52,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
         this.setVerticalFadingEdgeEnabled(false);
         this.context = context;
         this.activity = activity;
+        coordinateSystem = new CoordinateSystem();
     }
 
     @Override
@@ -69,7 +72,6 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
                 touchCoordinates.setX(motionEvent.getX());
                 touchCoordinates.setY(motionEvent.getY());
 
-
                 if (createFigureMode) {
                     CreateNewFigureInCreateFigureMode(motionEvent);
                 }
@@ -88,6 +90,9 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
                 if (isTouchedShape) {
                     shapes.get(FIRST_SHAPE_IN_LIST).move(touchCoordinates);
                     getFigureTouchedWithFirstFigure();
+                    for (ShapeList shape : shapes){
+                        shape.setFigureThatItWillNotBeOutsideTheScreen(getWidth(),getHeight());
+                    }
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -206,8 +211,9 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             shapes.get(FIRST_SHAPE_IN_LIST).draw(canvas, paint);
         }
         if (shapes.size() > 0) {
-            canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 10, 10, p);
+        canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 30, 15, p);
         }
+        coordinateSystem.draw(canvas);
     }
 
     @Override

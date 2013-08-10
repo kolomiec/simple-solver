@@ -32,7 +32,7 @@ public class StaticData {
     }
 
     public static void drawTextWithShadow(Canvas canvas, String label, float x, float y) {
-        canvas.drawText(label, x + 1, y + 2, StaticData.getLabelPaint(Color.BLACK));
+        canvas.drawText(label, x + 1, y + 2, StaticData.getLabelPaint(Color.GRAY));
         canvas.drawText(label, x, y, StaticData.getLabelPaint(Color.WHITE));
     }
 

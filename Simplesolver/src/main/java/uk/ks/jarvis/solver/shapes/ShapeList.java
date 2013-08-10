@@ -21,10 +21,10 @@ public class ShapeList {
     }
 
     public void setRandomColor() {
-        if (shapeList.size() == 1){
+        if (shapeList.size() == 1) {
             shapeList.get(0).setColor(StaticData.getRandomColor());
         } else
-        color = StaticData.getRandomColor();
+            color = StaticData.getRandomColor();
     }
 
     public boolean checkTouch(Shape shape1, Shape shape2) {
@@ -44,10 +44,10 @@ public class ShapeList {
     }
 
     public void draw(Canvas canvas, Paint paint) {
-        if (shapeList.size() == 1){
+        if (shapeList.size() == 1) {
             paint.setColor(shapeList.get(0).getColor());
         } else
-        paint.setColor(color);
+            paint.setColor(color);
         for (Shape shape : shapeList) {
             shape.draw(canvas, paint);
         }
@@ -96,6 +96,20 @@ public class ShapeList {
         return false;
     }
 
+    public void setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
+        for (Shape shape : this.shapeList) {
+            Point deltaPoint = shape.setFigureThatItWillNotBeOutsideTheScreen(maxX,maxY);
+            if (deltaPoint != null){
+                for (Shape shape1 : this.shapeList) {
+                    if (shape1.getClass()==Line.class){
+                        ((Line)shape1).numberTouchedPoint=0;
+                    }
+                    shape1.changeCoordinatesToDelta(deltaPoint);
+                }
+            }
+        }
+    }
+
     private void changeCoordinates(int count) {
         Point delta = new Point(0f, 0f);
         if (shapeList.get(count).getClass() == (Line.class)) {
@@ -109,13 +123,13 @@ public class ShapeList {
         for (Shape shape : this.shapeList) {
             if (count1 != count) {
                 if (shape.getClass() == (Line.class)) {
-                    ((Line) shape).getDrawedPoint1().setX(((Line) shape).getDrawedPoint1().getX()-delta.getX());
-                    ((Line) shape).getDrawedPoint1().setY(((Line) shape).getDrawedPoint1().getY()-delta.getY());
-                    ((Line) shape).getDrawedPoint2().setX(((Line) shape).getDrawedPoint2().getX()-delta.getX());
-                    ((Line) shape).getDrawedPoint2().setY(((Line) shape).getDrawedPoint2().getY()-delta.getY());
+                    ((Line) shape).getDrawedPoint1().setX(((Line) shape).getDrawedPoint1().getX() - delta.getX());
+                    ((Line) shape).getDrawedPoint1().setY(((Line) shape).getDrawedPoint1().getY() - delta.getY());
+                    ((Line) shape).getDrawedPoint2().setX(((Line) shape).getDrawedPoint2().getX() - delta.getX());
+                    ((Line) shape).getDrawedPoint2().setY(((Line) shape).getDrawedPoint2().getY() - delta.getY());
                 } else if (shape.getClass() == (Circle.class)) {
-                    ((Circle) shape).getDrawedCenterPoint().setX(((Circle) shape).getDrawedCenterPoint().getX()-delta.getX());
-                    ((Circle) shape).getDrawedCenterPoint().setY(((Circle) shape).getDrawedCenterPoint().getY()-delta.getY());
+                    ((Circle) shape).getDrawedCenterPoint().setX(((Circle) shape).getDrawedCenterPoint().getX() - delta.getX());
+                    ((Circle) shape).getDrawedCenterPoint().setY(((Circle) shape).getDrawedCenterPoint().getY() - delta.getY());
                 }
             }
             count++;
@@ -131,8 +145,9 @@ public class ShapeList {
     public List<Shape> getShapeArray() {
         return shapeList;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return shapeList.get(0).toString();
     }
 }
