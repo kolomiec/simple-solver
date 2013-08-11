@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 import uk.ks.jarvis.solver.CoordinatePlane.CoordinateSystem;
+import uk.ks.jarvis.solver.CoordinatePlane.SystemInformation;
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.fragments.CreateFigureDialog;
 import uk.ks.jarvis.solver.fragments.ShapeDialog;
@@ -37,6 +38,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     private Shape createShape;
     private CoordinateSystem coordinateSystem;
     private boolean showScale = true;
+    private boolean coordinateSystemCreated = false;
 
     public BaseHolder(Context context) {
         super(context);
@@ -53,7 +55,6 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
         this.setVerticalFadingEdgeEnabled(false);
         this.context = context;
         this.activity = activity;
-        coordinateSystem = new CoordinateSystem();
     }
 
     @Override
@@ -91,7 +92,6 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
                 if (isTouchedShape) {
                     shapes.get(FIRST_SHAPE_IN_LIST).move(touchCoordinates);
                     getFigureTouchedWithFirstFigure();
-
                     for (ShapeList shape : shapes) {
                         shape.setFigureThatItWillNotBeOutsideTheScreen(getWidth(), getHeight());
                     }
@@ -198,12 +198,23 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             }
         }
     }
-    public void setShowScale(){
+
+    public void setShowScale() {
         showScale = !showScale;
         invalidate();
     }
 
+    private void setSystemInformation() {
+        SystemInformation.DISPLAY_HEIGHT = this.getHeight();
+        SystemInformation.DISPLAY_WIDTH = this.getWidth();
+    }
+
     private void refresh(Canvas canvas, Paint p) {
+        if (!coordinateSystemCreated) {
+            setSystemInformation();
+            coordinateSystem = new CoordinateSystem();
+            coordinateSystemCreated = true;
+        }
         canvas.drawColor(Color.BLACK);
         paint.setStrokeWidth(4);
         for (ShapeList shape : shapes) {

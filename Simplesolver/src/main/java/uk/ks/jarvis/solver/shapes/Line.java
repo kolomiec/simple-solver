@@ -34,7 +34,6 @@ public class Line implements Shape {
         setPoint(drawedPoint1, point1);
         setPoint(drawedPoint2, point2);
         color = StaticData.getRandomColor();
-
     }
 
     @Override
@@ -53,7 +52,8 @@ public class Line implements Shape {
 
     @Override
     public String toString() {
-        return "Line " + label1 + label2 + " - x1: " + Math.round(point1.getX()) + ", y1: " + Math.round(point1.getY()) + ", x2: " + Math.round(point2.getX()) + ", y2: " + Math.round(point2.getY());
+        return "Line " + label1 + label2 + " - x1: " + Math.round(drawedPoint1.getX()) + ", y1: " + Math.round(drawedPoint1.getY()) +
+                ", x2: " + Math.round(drawedPoint2.getX()) + ", y2: " + Math.round(drawedPoint2.getY());
     }
 
     @Override
@@ -204,7 +204,6 @@ public class Line implements Shape {
     }
 
     public boolean isDotTouched(Point p1, Point p2) {
-
         float delta = 20f;
         if ((p1.getX() < (p2.getX() + delta)) && (p1.getX() > (p2.getX() - delta)))
             if ((p1.getY() < (p2.getY() + delta)) && (p1.getY() > (p2.getY() - delta))) {

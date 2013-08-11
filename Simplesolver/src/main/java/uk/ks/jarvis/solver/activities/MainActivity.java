@@ -10,7 +10,6 @@ import uk.ks.jarvis.solver.CoordinatePlane.SystemInformation;
 import uk.ks.jarvis.solver.R;
 
 public class MainActivity extends FragmentActivity implements View.OnTouchListener, View.OnLongClickListener {
-    private DisplayMetrics displayMetrics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,7 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
         return true;
     }
     private void setSystemInformation() {
-        displayMetrics = getBaseContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = getBaseContext().getResources().getDisplayMetrics();
         SystemInformation.DISPLAY_WIDTH = displayMetrics.widthPixels;
         SystemInformation.DISPLAY_HEIGHT = displayMetrics.heightPixels;
     }
