@@ -45,7 +45,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return "x:" + Math.round(drawedCenterPoint.getX()) + ", y:" + Math.round(drawedCenterPoint.getY()) + ", radius:" + Math.round(radius);
+        return "Circle "+label+" - x: " + Math.round(drawedCenterPoint.getX()) + ", y: " + Math.round(drawedCenterPoint.getY()) + ", radius: " + Math.round(radius);
     }
 
     @Override
@@ -138,42 +138,38 @@ public class Circle implements Shape {
     }
 
     @Override
-    public boolean checkTouchWithOtherFigure(Circle circle) {
+    public Point checkTouchWithOtherFigure(Circle circle) {
         double length1 = StaticData.getLengthBetweenTwoPoints(this.getCoordinatesOfCenterPoint(), circle.getCoordinatesOfCenterPoint());
         double length2 = this.getRadius() + circle.getRadius();
 
         if (((length1) < (length2 + 15)) && ((length1) > (length2 - 15))) {
             this.getCoordinates(circle.getCoordinatesOfCenterPoint());
             Point newCoordinates = new Point(getCoordinatesOfBorderOfCircle(centerPoint, circle.getCoordinatesOfCenterPoint(), length2));
-            setPoint(drawedCenterPoint, newCoordinates);
-            return true;
+            return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean checkTouchWithOtherFigure(Line line) {
+    public Point checkTouchWithOtherFigure(Line line) {
         Point p = line.getCoordinates(this.getCoordinatesOfCenterPoint());
         if (line.isLineTouched(p)) {
             double length = StaticData.getLengthBetweenTwoPoints(p, this.getCoordinatesOfCenterPoint());
             if (((length) < (this.radius + 15)) && ((length) > (this.radius - 15))) {
                 Point delta = new Point(this.getCoordinates(p));
                 setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
-                setPoint(drawedCenterPoint, centerPoint.getX() + delta.getX(), centerPoint.getY() + delta.getY());
-                return true;
+                return new Point(drawedCenterPoint.getX()-(centerPoint.getX() + delta.getX()),drawedCenterPoint.getY()-(centerPoint.getY() + delta.getY()));
             }
         }
         if (this.isBorderTouched(line.getPoint1(), 20)) {
             Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, line.getPoint1(), radius);
-            setPoint(drawedCenterPoint, newCoordinates);
-            return true;
+            return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
         }
         if (this.isBorderTouched(line.getPoint2(), 20)) {
             Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, line.getPoint2(), radius);
-            setPoint(drawedCenterPoint, newCoordinates);
-            return true;
+            return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
         }
-        return false;
+        return null;
     }
 
     @Override

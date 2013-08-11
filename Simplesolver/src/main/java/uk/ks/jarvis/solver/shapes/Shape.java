@@ -16,9 +16,9 @@ public interface Shape {
 
     public boolean isTouched(Point point);
 
-    public boolean checkTouchWithOtherFigure(Circle circle);
+    public Point checkTouchWithOtherFigure(Circle circle);
 
-    public boolean checkTouchWithOtherFigure(Line line);
+    public Point checkTouchWithOtherFigure(Line line);
 
     public void refreshCoordinates();
 

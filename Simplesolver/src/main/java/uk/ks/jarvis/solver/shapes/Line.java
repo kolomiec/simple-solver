@@ -16,7 +16,7 @@ public class Line implements Shape {
     private final String label1;
     private final String label2;
     public int color = 0;
-    public  int numberTouchedPoint = 0;
+    public int numberTouchedPoint = 0;
     Point lastTouchCoordinates = new Point(0f, 0f);
     Point deltaTouchCoordinates = new Point(0f, 0f);
     private Point point1;
@@ -53,7 +53,7 @@ public class Line implements Shape {
 
     @Override
     public String toString() {
-        return "x1:" + Math.round(point1.getX()) + ", y1:" + Math.round(point1.getY()) + ", x2:" + Math.round(point2.getX()) + ", y2:" + Math.round(point2.getY());
+        return "Line " + label1 + label2 + " - x1: " + Math.round(point1.getX()) + ", y1: " + Math.round(point1.getY()) + ", x2: " + Math.round(point2.getX()) + ", y2: " + Math.round(point2.getY());
     }
 
     @Override
@@ -100,38 +100,42 @@ public class Line implements Shape {
     }
 
     @Override
-    public boolean checkTouchWithOtherFigure(Circle circle) {
+    public Point checkTouchWithOtherFigure(Circle circle) {
         if (circle.isBorderTouched(this.getPoint1(), 20)) {
             Point newCoordinates = circle.getCoordinates(this.point1);
+            Point changedPoint1 = new Point(drawedPoint1);
+            Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
                 case 0:
                     Point deltaCoordinates = new Point(this.point1.getX() - this.point2.getX(), this.point1.getY() - this.point2.getY());
-                    setPoint(drawedPoint1, newCoordinates);
-                    setPoint(drawedPoint2, this.drawedPoint1.getX() - deltaCoordinates.getX(), this.drawedPoint1.getY() - deltaCoordinates.getY());
+                    setPoint(changedPoint1, newCoordinates);
+                    setPoint(changedPoint2, changedPoint1.getX() - deltaCoordinates.getX(), changedPoint1.getY() - deltaCoordinates.getY());
                     break;
                 case 1:
-                    setPoint(drawedPoint1, newCoordinates);
+                    setPoint(changedPoint1, newCoordinates);
                     break;
                 case 2:
                     break;
             }
-            return true;
+            return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
         }
         if (circle.isBorderTouched(this.getPoint2(), 20)) {
             Point newCoordinates = circle.getCoordinates(this.point2);
+            Point changedPoint1 = new Point(drawedPoint1);
+            Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
                 case 0:
                     Point deltaCoordinates = new Point(this.point1.getX() - this.point2.getX(), this.point1.getY() - this.point2.getY());
-                    setPoint(drawedPoint2, newCoordinates);
-                    setPoint(drawedPoint1, this.drawedPoint2.getX() + deltaCoordinates.getX(), this.drawedPoint2.getY() + deltaCoordinates.getY());
+                    setPoint(changedPoint2, newCoordinates);
+                    setPoint(changedPoint1, changedPoint2.getX() + deltaCoordinates.getX(), changedPoint2.getY() + deltaCoordinates.getY());
                     break;
                 case 1:
                     break;
                 case 2:
-                    setPoint(drawedPoint1, newCoordinates);
+                    setPoint(changedPoint1, newCoordinates);
                     break;
             }
-            return true;
+            return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
         } else {
             Point p = this.getCoordinates(circle.getCoordinatesOfCenterPoint());
             if (this.isLineTouched(p)) {
@@ -140,51 +144,53 @@ public class Line implements Shape {
                     Point delta = circle.getCoordinates(p);
 
                     setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
-                    setPoint(drawedPoint1, this.drawedPoint1.getX() - delta.getX(), this.drawedPoint1.getY() - delta.getY());
-                    setPoint(drawedPoint2, this.drawedPoint2.getX() - delta.getX(), this.drawedPoint2.getY() - delta.getY());
-                    return true;
+                    return delta;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean checkTouchWithOtherFigure(Line line) {
+    public Point checkTouchWithOtherFigure(Line line) {
         if (line.isLineTouched(this.getPoint1())) {
 
-            Point newCoordinates = line.getCoordinates(this.getPoint1());
+            Point newCoordinates = line.getCoordinates(this.point1);
+            Point changedPoint1 = new Point(drawedPoint1);
+            Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
                 case 0:
                     Point deltaCoordinates = new Point(this.point1.getX() - this.point2.getX(), this.point1.getY() - this.point2.getY());
-                    setPoint(drawedPoint1, newCoordinates);
-                    setPoint(drawedPoint2, this.drawedPoint1.getX() - deltaCoordinates.getX(), this.drawedPoint1.getY() - deltaCoordinates.getY());
+                    setPoint(changedPoint1, newCoordinates);
+                    setPoint(changedPoint2, changedPoint1.getX() - deltaCoordinates.getX(), changedPoint1.getY() - deltaCoordinates.getY());
                     break;
                 case 1:
-                    setPoint(drawedPoint1, newCoordinates);
+                    setPoint(changedPoint1, newCoordinates);
                     break;
                 case 2:
                     break;
             }
-            return true;
+            return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
         }
         if (line.isLineTouched(this.getPoint2())) {
             Point newCoordinates = line.getCoordinates(this.getPoint2());
+            Point changedPoint1 = new Point(drawedPoint1);
+            Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
                 case 0:
                     Point deltaCoordinates = new Point(this.point1.getX() - this.point2.getX(), this.point1.getY() - this.point2.getY());
-                    setPoint(drawedPoint2, newCoordinates);
-                    setPoint(drawedPoint1, this.drawedPoint2.getX() + deltaCoordinates.getX(), this.drawedPoint2.getY() + deltaCoordinates.getY());
+                    setPoint(changedPoint2, newCoordinates);
+                    setPoint(changedPoint1, changedPoint2.getX() + deltaCoordinates.getX(), changedPoint2.getY() + deltaCoordinates.getY());
                     break;
                 case 1:
                     break;
                 case 2:
-                    setPoint(drawedPoint2, newCoordinates);
+                    setPoint(changedPoint1, newCoordinates);
                     break;
             }
-            return true;
+            return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -241,13 +247,10 @@ public class Line implements Shape {
     public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
         switch (this.getNumberOfSelectedPoint()) {
             case 0:
-                Point delta01 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint1, maxX, maxY);
-                Point delta02 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint2, maxX, maxY);
-                //                setPoint(drawedPoint1, drawedPoint1.getX() - delta01.getX(), drawedPoint1.getY() - delta01.getY());
-//                setPoint(drawedPoint2, drawedPoint2.getX() - delta01.getX(), drawedPoint2.getY() - delta01.getY());
-//                setPoint(drawedPoint1, drawedPoint1.getX() - delta02.getX(), drawedPoint1.getY() - delta02.getY());
-//                setPoint(drawedPoint2, drawedPoint2.getX() - delta02.getX(), drawedPoint2.getY() - delta02.getY());
-//                Point delta = new Point(drawedPoint1.getX();sumDelta.getX());
+                Point changedPoint1 = new Point(drawedPoint1);
+                Point changedPoint2 = new Point(drawedPoint2);
+                Point delta01 = setDotThatItWillNotBeOutsideTheScreen(changedPoint1, maxX, maxY);
+                Point delta02 = setDotThatItWillNotBeOutsideTheScreen(changedPoint2, maxX, maxY);
                 return new Point(delta01.getX() + delta02.getX(), delta01.getY() + delta02.getY());
             case 1:
                 Point delta1 = setDotThatItWillNotBeOutsideTheScreen(drawedPoint1, maxX, maxY);
@@ -259,14 +262,6 @@ public class Line implements Shape {
                 return null;
         }
         return null;
-    }
-
-    @Override
-    public void changeCoordinatesToDelta(Point delta) {
-        drawedPoint1.setX(drawedPoint1.getX()-delta.getX());
-        drawedPoint1.setY(drawedPoint1.getY()-delta.getY());
-        drawedPoint2.setX(drawedPoint2.getX()-delta.getX());
-        drawedPoint2.setY(drawedPoint2.getY()-delta.getY());
     }
 
     public Point setDotThatItWillNotBeOutsideTheScreen(Point point, float maxX, float maxY) {
@@ -282,6 +277,14 @@ public class Line implements Shape {
             pointForChange.setY(0f);
         }
         return new Point(point.getX() - pointForChange.getX(), point.getY() - pointForChange.getY());
+    }
+
+    @Override
+    public void changeCoordinatesToDelta(Point delta) {
+        drawedPoint1.setX(drawedPoint1.getX() - delta.getX());
+        drawedPoint1.setY(drawedPoint1.getY() - delta.getY());
+        drawedPoint2.setX(drawedPoint2.getX() - delta.getX());
+        drawedPoint2.setY(drawedPoint2.getY() - delta.getY());
     }
 
     public void changePointCoordinates(Point point1, Point touchCoordinates) {

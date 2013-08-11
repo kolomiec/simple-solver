@@ -27,7 +27,7 @@ public class ShapeList {
             color = StaticData.getRandomColor();
     }
 
-    public boolean checkTouch(Shape shape1, Shape shape2) {
+    public Point checkTouch(Shape shape1, Shape shape2) {
         if (((shape1.getClass()) == (Line.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
@@ -40,7 +40,7 @@ public class ShapeList {
         } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (Line.class))) {
             return shape1.checkTouchWithOtherFigure((Line) shape2);
         }
-        return false;
+        return null;
     }
 
     public void draw(Canvas canvas, Paint paint) {
@@ -83,30 +83,35 @@ public class ShapeList {
     }
 
     public boolean checkTouchWithOtherFigure(ShapeList shapeList) {
-        int count = 0;
         for (Shape shape1 : this.shapeList) {
             for (Shape shape2 : shapeList.getShapeArray()) {
-                if (checkTouch(shape1, shape2)) {
-//                    changeCoordinates(count);
+                Point delta = checkTouch(shape1, shape2);
+                if (delta != null) {
+                    changeCoordinatesToDelta(delta);
                     return true;
                 }
             }
-            count++;
         }
         return false;
     }
 
     public void setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
         for (Shape shape : this.shapeList) {
-            Point deltaPoint = shape.setFigureThatItWillNotBeOutsideTheScreen(maxX,maxY);
-            if (deltaPoint != null){
+            Point deltaPoint = shape.setFigureThatItWillNotBeOutsideTheScreen(maxX, maxY);
+            if (deltaPoint != null) {
                 for (Shape shape1 : this.shapeList) {
-                    if (shape1.getClass()==Line.class){
-                        ((Line)shape1).numberTouchedPoint=0;
+                    if (shape1.getClass() == Line.class) {
+                        ((Line) shape1).numberTouchedPoint = 0;
                     }
-                    shape1.changeCoordinatesToDelta(deltaPoint);
                 }
+                changeCoordinatesToDelta(deltaPoint);
             }
+        }
+    }
+
+    public void changeCoordinatesToDelta(Point delta) {
+        for (Shape shape1 : this.shapeList) {
+            shape1.changeCoordinatesToDelta(delta);
         }
     }
 

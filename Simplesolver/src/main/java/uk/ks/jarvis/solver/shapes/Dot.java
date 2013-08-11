@@ -76,17 +76,18 @@ public class Dot implements Shape {
 
     @Override
     public void changeCoordinatesToDelta(Point delta) {
-
+        point.setX(point.getX()-delta.getX());
+        point.setY(point.getY()-delta.getY());
     }
 
     @Override
-    public boolean checkTouchWithOtherFigure(Circle circle) {
-        return false;
+    public Point checkTouchWithOtherFigure(Circle circle) {
+        return null;
     }
 
     @Override
-    public boolean checkTouchWithOtherFigure(Line line) {
-        return false;
+    public Point checkTouchWithOtherFigure(Line line) {
+        return null;
     }
 
     public Point getCoordinatesPoint() {
