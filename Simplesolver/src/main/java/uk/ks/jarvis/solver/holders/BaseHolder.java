@@ -91,6 +91,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
                 if (isTouchedShape) {
                     shapes.get(FIRST_SHAPE_IN_LIST).move(touchCoordinates);
                     getFigureTouchedWithFirstFigure();
+
                     for (ShapeList shape : shapes) {
                         shape.setFigureThatItWillNotBeOutsideTheScreen(getWidth(), getHeight());
                     }

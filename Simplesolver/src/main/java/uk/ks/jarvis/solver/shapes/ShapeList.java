@@ -115,32 +115,6 @@ public class ShapeList {
         }
     }
 
-    private void changeCoordinates(int count) {
-        Point delta = new Point(0f, 0f);
-        if (shapeList.get(count).getClass() == (Line.class)) {
-            delta.setX(((Line) shapeList.get(count)).getPoint1().getX() - ((Line) shapeList.get(count)).getDrawedPoint1().getX());
-            delta.setY(((Line) shapeList.get(count)).getPoint1().getY() - ((Line) shapeList.get(count)).getDrawedPoint1().getY());
-        } else if (shapeList.get(count).getClass() == (Circle.class)) {
-            delta.setX(((Circle) shapeList.get(count)).getCoordinatesOfCenterPoint().getX() - ((Circle) shapeList.get(count)).getDrawedCenterPoint().getX());
-            delta.setY(((Circle) shapeList.get(count)).getCoordinatesOfCenterPoint().getY() - ((Circle) shapeList.get(count)).getDrawedCenterPoint().getY());
-        }
-        int count1 = 0;
-        for (Shape shape : this.shapeList) {
-            if (count1 != count) {
-                if (shape.getClass() == (Line.class)) {
-                    ((Line) shape).getDrawedPoint1().setX(((Line) shape).getDrawedPoint1().getX() - delta.getX());
-                    ((Line) shape).getDrawedPoint1().setY(((Line) shape).getDrawedPoint1().getY() - delta.getY());
-                    ((Line) shape).getDrawedPoint2().setX(((Line) shape).getDrawedPoint2().getX() - delta.getX());
-                    ((Line) shape).getDrawedPoint2().setY(((Line) shape).getDrawedPoint2().getY() - delta.getY());
-                } else if (shape.getClass() == (Circle.class)) {
-                    ((Circle) shape).getDrawedCenterPoint().setX(((Circle) shape).getDrawedCenterPoint().getX() - delta.getX());
-                    ((Circle) shape).getDrawedCenterPoint().setY(((Circle) shape).getDrawedCenterPoint().getY() - delta.getY());
-                }
-            }
-            count++;
-        }
-    }
-
     public void refreshCoordinates() {
         for (Shape shape : shapeList) {
             shape.refreshCoordinates();

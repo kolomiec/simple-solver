@@ -250,6 +250,8 @@ public class Line implements Shape {
                 Point changedPoint1 = new Point(drawedPoint1);
                 Point changedPoint2 = new Point(drawedPoint2);
                 Point delta01 = setDotThatItWillNotBeOutsideTheScreen(changedPoint1, maxX, maxY);
+                setPoint(changedPoint1, changedPoint1.getX() - delta01.getX(), changedPoint1.getY() - delta01.getY());
+                setPoint(changedPoint2, changedPoint2.getX() - delta01.getX(), changedPoint2.getY() - delta01.getY());
                 Point delta02 = setDotThatItWillNotBeOutsideTheScreen(changedPoint2, maxX, maxY);
                 return new Point(delta01.getX() + delta02.getX(), delta01.getY() + delta02.getY());
             case 1:
