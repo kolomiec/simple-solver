@@ -13,4 +13,7 @@
     <item android:id="@+id/Scale"
           android:title="@string/scale"
           android:showAsAction="always"/>
+    <item android:id="@+id/Theme"
+          android:title="@string/theme"
+          android:showAsAction="always"/>
 </menu>

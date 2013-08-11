@@ -2,7 +2,6 @@ package uk.ks.jarvis.solver.holders;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
@@ -14,6 +13,7 @@ import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.fragments.CreateFigureDialog;
 import uk.ks.jarvis.solver.fragments.ShapeDialog;
 import uk.ks.jarvis.solver.shapes.*;
+import uk.ks.jarvis.solver.utils.ColorTheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -215,7 +215,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             coordinateSystem = new CoordinateSystem();
             coordinateSystemCreated = true;
         }
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(ColorTheme.DARK_COLOR);
         paint.setStrokeWidth(4);
         for (ShapeList shape : shapes) {
             shape.draw(canvas, p);

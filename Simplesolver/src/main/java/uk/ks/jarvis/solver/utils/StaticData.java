@@ -24,7 +24,7 @@ public class StaticData {
 
     public static int getRandomColor() {
         Random rand = new Random();
-        return Color.argb(250, rand.nextInt(156) + 100, rand.nextInt(156) + 100, rand.nextInt(156) + 100);
+        return Color.argb(250, rand.nextInt(156) + 50, rand.nextInt(156) + 50, rand.nextInt(156) + 50);
     }
 
     public static double getLengthBetweenTwoPoints(Point point1, Point point2) {
@@ -33,7 +33,7 @@ public class StaticData {
 
     public static void drawTextWithShadow(Canvas canvas, String label, float x, float y) {
         canvas.drawText(label, x + 1, y + 2, StaticData.getLabelPaint(Color.GRAY));
-        canvas.drawText(label, x, y, StaticData.getLabelPaint(Color.WHITE));
+        canvas.drawText(label, x, y, StaticData.getLabelPaint(ColorTheme.LIGHT_COLOR));
     }
 
     public static void setPoint(Point point, float x, float y) {

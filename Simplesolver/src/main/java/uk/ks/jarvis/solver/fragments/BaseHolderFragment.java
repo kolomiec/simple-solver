@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.*;
 import uk.ks.jarvis.solver.R;
 import uk.ks.jarvis.solver.holders.BaseHolder;
+import uk.ks.jarvis.solver.utils.ColorTheme;
 
 /**
  * Created by sayenko on 7/14/13.
@@ -61,7 +62,10 @@ public class BaseHolderFragment extends Fragment {
             case R.id.Scale:
                 ((BaseHolder)baseHolder).setShowScale();
                 return true;
-
+            case R.id.Theme:
+                ColorTheme.changeTheme();
+                baseHolder.invalidate();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

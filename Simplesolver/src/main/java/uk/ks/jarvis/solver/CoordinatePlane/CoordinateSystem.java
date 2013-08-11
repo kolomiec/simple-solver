@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import uk.ks.jarvis.solver.beans.Point;
+import uk.ks.jarvis.solver.utils.ColorTheme;
 
 /**
  * Created by sayenko on 8/10/13.
@@ -23,7 +24,7 @@ public class CoordinateSystem {
 
     public CoordinateSystem() {
         paint = new Paint();
-        paint.setColor(Color.WHITE);
+        paint.setColor(ColorTheme.LIGHT_COLOR);
     }
 
     public void draw(Canvas canvas) {
@@ -48,7 +49,7 @@ public class CoordinateSystem {
         for (int i = 0; i < labelsCount - 1; i++) {
             paint.setColor(Color.GRAY);
             canvas.drawLine(cursorPos.getX() - labelHeight, cursorPos.getY(), cursorPos.getX() + labelHeight, cursorPos.getY(), paint);
-            paint.setColor(Color.WHITE);
+            paint.setColor(ColorTheme.LIGHT_COLOR);
             canvas.drawText(getString(i + 1), cursorPos.getX() - labelHeight - textWidth, cursorPos.getY() + magicNumber, paint);
             cursorPos.setY(cursorPos.getY() - labelStep);
         }
@@ -71,7 +72,7 @@ public class CoordinateSystem {
         for (int i = 0; i < labelsCount - 1; i++) {
             paint.setColor(Color.GRAY);
             canvas.drawLine(cursorPos.getX(), cursorPos.getY() - labelHeight, cursorPos.getX(), cursorPos.getY() + labelHeight, paint);
-            paint.setColor(Color.WHITE);
+            paint.setColor(ColorTheme.LIGHT_COLOR);
             canvas.drawText(getString(i + 1), cursorPos.getX() - magicNumber, cursorPos.getY() + labelHeight + textWidth, paint);
             cursorPos.setX(cursorPos.getX() + labelStep);
         }
