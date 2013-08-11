@@ -58,26 +58,60 @@ public class Line implements Shape {
 
     @Override
     public void move(Point point, boolean onlyMove) {
+        Point p1 = new Point(point1);
+        Point p2 = new Point(point2);
         if (!onlyMove) {
             changeLineCoordinates(point1, point2, point);
+            setPoint(drawedPoint1, point1);
+            setPoint(drawedPoint2, point2);
         } else {
             switch (numberTouchedPoint) {
                 case 0: {
                     changeLineCoordinates(point1, point2, point);
+                    setPoint(drawedPoint1, point1);
+                    setPoint(drawedPoint2, point2);
+//                    p1 = new Point(point1);
+//                    p2 = new Point(point2);
                 }
                 break;
                 case 1: {
                     changePointCoordinates(point1, point);
+                    setPoint(drawedPoint1, point1);
+                    setPoint(drawedPoint2, point2);
+
+                    p1 = new Point(point1);
+                    if ((getLengthBetweenTwoPoints(point1, point2) > 20)) {
+                        if (Math.abs(point1.getX() - point2.getX()) < 7) {
+                            drawedPoint1.setX(point2.getX());
+                        }
+                        if (Math.abs(point1.getY() - point2.getY()) < 7) {
+                            drawedPoint1.setY(point2.getY());
+                        }
+                    }
                 }
                 break;
                 case 2: {
                     changePointCoordinates(point2, point);
+                    setPoint(drawedPoint1, point1);
+                    setPoint(drawedPoint2, point2);
+
+                    p2 = new Point(point2);
+                    if ((getLengthBetweenTwoPoints(point1, point2) > 20)) {
+                        if (Math.abs(point1.getX() - point2.getX()) < 7) {
+                            drawedPoint2.setX(point1.getX());
+                        }
+                        if (Math.abs(point1.getY() - point2.getY()) < 7) {
+                            drawedPoint2.setY(point1.getY());
+                        }
+                    }
                 }
                 break;
             }
         }
-        setPoint(drawedPoint1, point1);
-        setPoint(drawedPoint2, point2);
+//        setPoint(drawedPoint1, point1);
+//        setPoint(drawedPoint2, point2);
+//        setPoint(point1, p1);
+//        setPoint(point2, p2);
         setPoint(lastTouchCoordinates, point);
     }
 
