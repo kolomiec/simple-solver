@@ -10,7 +10,6 @@
     <string name="dot">Dot</string>
     <string name="circle">Circle</string>
     <string name="line">Line</string>
-    <string name="menu">Shape menu</string>
     <string name="cancelButton">Cancel</string>
-
+    <string name="scale">Turn on/off scale</string>
 </resources>

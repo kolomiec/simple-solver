@@ -36,6 +36,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     private boolean createFigureMode;
     private Shape createShape;
     private CoordinateSystem coordinateSystem;
+    private boolean showScale = true;
 
     public BaseHolder(Context context) {
         super(context);
@@ -90,8 +91,8 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
                 if (isTouchedShape) {
                     shapes.get(FIRST_SHAPE_IN_LIST).move(touchCoordinates);
                     getFigureTouchedWithFirstFigure();
-                    for (ShapeList shape : shapes){
-                        shape.setFigureThatItWillNotBeOutsideTheScreen(getWidth(),getHeight());
+                    for (ShapeList shape : shapes) {
+                        shape.setFigureThatItWillNotBeOutsideTheScreen(getWidth(), getHeight());
                     }
                 }
                 break;
@@ -196,6 +197,10 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             }
         }
     }
+    public void setShowScale(){
+        showScale = !showScale;
+        invalidate();
+    }
 
     private void refresh(Canvas canvas, Paint p) {
         canvas.drawColor(Color.BLACK);
@@ -211,9 +216,11 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             shapes.get(FIRST_SHAPE_IN_LIST).draw(canvas, paint);
         }
         if (shapes.size() > 0) {
-        canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 30, 15, p);
+            canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 30, 15, p);
         }
-        coordinateSystem.draw(canvas);
+        if (showScale) {
+            coordinateSystem.draw(canvas);
+        }
     }
 
     @Override

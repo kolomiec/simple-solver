@@ -58,6 +58,10 @@ public class BaseHolderFragment extends Fragment {
                 CreateNewLineDialog createNewLineDialog = new CreateNewLineDialog((BaseHolder) baseHolder);
                 createNewLineDialog.show(this.getActivity().getSupportFragmentManager(), "");
                 return true;
+            case R.id.Scale:
+                ((BaseHolder)baseHolder).setShowScale();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
