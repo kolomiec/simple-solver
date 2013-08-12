@@ -11,7 +11,7 @@ import android.widget.TextView;
 import uk.ks.jarvis.solver.R;
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.holders.BaseHolder;
-import uk.ks.jarvis.solver.shapes.Line;
+import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
 import uk.ks.jarvis.solver.utils.ShapeNameGenerator;
@@ -66,7 +66,7 @@ public class CreateNewLineDialog extends DialogFragment implements View.OnClickL
 //            Float yCoordinate = new Float(yCoordinataNP.getValue());
 //            Shape circle = new Circle(radius,new Point(xCoordinate, yCoordinate),
 //                                ShapeNameGenerator.getInstance().getNextName());
-            Shape line = new Line(new Point(10f, 20f), new Point(150f, 300f), ShapeNameGenerator.getInstance().getNextName(),
+            Shape line = new ShortLine(new Point(10f, 20f), new Point(150f, 300f), ShapeNameGenerator.getInstance().getNextName(),
                     ShapeNameGenerator.getInstance().getNextName());
 
             ShapeList listOfShapes = new ShapeList(line);

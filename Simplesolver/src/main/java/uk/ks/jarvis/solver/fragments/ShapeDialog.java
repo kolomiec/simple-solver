@@ -35,7 +35,7 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
     }
 
     private String getTitle() {
-        if (touchedShape.getClass() == (Line.class)) {
+        if (touchedShape.getClass() == (ShortLine.class)) {
             return "line";
         } else if (touchedShape.getClass() == (Circle.class)) {
             return "circle";

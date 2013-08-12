@@ -8,7 +8,7 @@
     <fragment class="uk.ks.jarvis.solver.fragments.LogFragment"
               android:id="@+id/logFragment"
               android:layout_width="0dp"
-              android:layout_weight=".03"
+              android:layout_weight=".05"
               android:layout_height="match_parent"/>
     <!--"Fragment B" -->
     <fragment class="uk.ks.jarvis.solver.fragments.BaseHolderFragment"

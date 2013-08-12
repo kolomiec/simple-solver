@@ -3,10 +3,15 @@ package uk.ks.jarvis.solver.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
 import uk.ks.jarvis.solver.R;
 import uk.ks.jarvis.solver.holders.BaseHolder;
-import uk.ks.jarvis.solver.utils.ColorTheme;
 
 /**
  * Created by sayenko on 7/14/13.
@@ -58,13 +63,6 @@ public class BaseHolderFragment extends Fragment {
             case R.id.Line:
                 CreateNewLineDialog createNewLineDialog = new CreateNewLineDialog((BaseHolder) baseHolder);
                 createNewLineDialog.show(this.getActivity().getSupportFragmentManager(), "");
-                return true;
-            case R.id.Scale:
-                ((BaseHolder)baseHolder).setShowScale();
-                return true;
-            case R.id.Theme:
-                ColorTheme.changeTheme();
-                baseHolder.invalidate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

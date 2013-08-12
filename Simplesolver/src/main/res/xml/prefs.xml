@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:title="Appearance"
+            android:key="appearance">
+
+    <CheckBoxPreference
+            android:title="Coordinate System"
+            android:defaultValue="true"
+            android:key="checkBox"
+            android:summary="Turn on/off coordinate system"/>
+    <ListPreference
+            android:title="Theme"
+            android:key="list"
+            android:summary="Choose color theme"
+            android:entries="@array/list"
+            android:entryValues="@array/lValues"
+            android:defaultValue="1">
+
+    </ListPreference>
+    </PreferenceCategory>
+    <!--<EditTextPreference-->
+    <!--android:title="EditText"-->
+    <!--android:key="name"-->
+    <!--android:summary="Enter Your name">-->
+    <!--</EditTextPreference>-->
+</PreferenceScreen>

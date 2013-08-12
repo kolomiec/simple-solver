@@ -86,7 +86,7 @@ public class Dot implements Shape {
     }
 
     @Override
-    public Point checkTouchWithOtherFigure(Line line) {
+    public Point checkTouchWithOtherFigure(ShortLine shortLine) {
         return null;
     }
 

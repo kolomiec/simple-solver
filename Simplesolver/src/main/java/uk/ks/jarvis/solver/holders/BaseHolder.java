@@ -1,22 +1,29 @@
 package uk.ks.jarvis.solver.holders;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.ks.jarvis.solver.CoordinatePlane.CoordinateSystem;
 import uk.ks.jarvis.solver.CoordinatePlane.SystemInformation;
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.fragments.CreateFigureDialog;
 import uk.ks.jarvis.solver.fragments.ShapeDialog;
-import uk.ks.jarvis.solver.shapes.*;
+import uk.ks.jarvis.solver.shapes.Circle;
+import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Shape;
+import uk.ks.jarvis.solver.shapes.ShapeList;
+import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.utils.ColorTheme;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -39,6 +46,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     private CoordinateSystem coordinateSystem;
     private boolean showScale = true;
     private boolean coordinateSystemCreated = false;
+    private SharedPreferences sharedPrefs;
 
     public BaseHolder(Context context) {
         super(context);
@@ -55,6 +63,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
         this.setVerticalFadingEdgeEnabled(false);
         this.context = context;
         this.activity = activity;
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Override
@@ -116,11 +125,11 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     }
 
     private void CreateNewFigureInCreateFigureMode(MotionEvent motionEvent) {
-        if (((createShape.getClass()) == (Line.class))) {
-            ((Line) createShape).getPoint1().setX(motionEvent.getX());
-            ((Line) createShape).getPoint1().setY(motionEvent.getY());
-            ((Line) createShape).getPoint2().setX(motionEvent.getX());
-            ((Line) createShape).getPoint2().setY(motionEvent.getY());
+        if (((createShape.getClass()) == (ShortLine.class))) {
+            ((ShortLine) createShape).getPoint1().setX(motionEvent.getX());
+            ((ShortLine) createShape).getPoint1().setY(motionEvent.getY());
+            ((ShortLine) createShape).getPoint2().setX(motionEvent.getX());
+            ((ShortLine) createShape).getPoint2().setY(motionEvent.getY());
         } else if (((createShape.getClass()) == (Circle.class))) {
             ((Circle) createShape).getCoordinatesOfCenterPoint().setX(motionEvent.getX());
             ((Circle) createShape).getCoordinatesOfCenterPoint().setY(motionEvent.getY());
@@ -230,7 +239,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
         if (shapes.size() > 0) {
             canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 30, 15, p);
         }
-        if (showScale) {
+        if (sharedPrefs.getBoolean("checkBox", false)){
             coordinateSystem.draw(canvas);
         }
     }

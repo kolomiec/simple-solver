@@ -8,13 +8,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import uk.ks.jarvis.solver.R;
+import uk.ks.jarvis.solver.holders.Log;
 
 /**
  * Created by sayenko on 7/14/13.
  */
 public class LogFragment extends Fragment implements View.OnTouchListener {
 
-    private View view = null;
+    private View view, log;
     private Context context = null;
 
     @Override
@@ -23,7 +24,12 @@ public class LogFragment extends Fragment implements View.OnTouchListener {
         view = inflater.inflate(R.layout.log, container, false);
         assert view != null;
         context = view.getContext();
-        return view;
+        view = inflater.inflate(R.layout.base_holder, container, false);
+        assert view != null;
+        context = view.getContext();
+        log = (View) view.findViewById(R.id.baseHolder);
+        log = new Log(context, getActivity());
+        return log;
     }
 
     @Override

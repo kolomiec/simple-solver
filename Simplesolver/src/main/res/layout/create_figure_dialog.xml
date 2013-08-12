@@ -39,7 +39,7 @@
             android:layout_marginRight="4dp"
             android:layout_marginBottom="2dp"
             android:fontFamily="sans-serif"
-            android:text="@string/line"
+            android:text="@string/shortLine"
             android:textSize="30sp"
             android:layout_gravity="center"/>
 

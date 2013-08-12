@@ -151,9 +151,9 @@ public class Circle implements Shape {
     }
 
     @Override
-    public Point checkTouchWithOtherFigure(Line line) {
-        Point p = line.getCoordinates(this.getCoordinatesOfCenterPoint());
-        if (line.isLineTouched(p)) {
+    public Point checkTouchWithOtherFigure(ShortLine shortLine) {
+        Point p = shortLine.getCoordinates(this.getCoordinatesOfCenterPoint());
+        if (shortLine.isLineTouched(p)) {
             double length = StaticData.getLengthBetweenTwoPoints(p, this.getCoordinatesOfCenterPoint());
             if (((length) < (this.radius + 15)) && ((length) > (this.radius - 15))) {
                 Point delta = new Point(this.getCoordinates(p));
@@ -161,12 +161,12 @@ public class Circle implements Shape {
                 return new Point(drawedCenterPoint.getX()-(centerPoint.getX() + delta.getX()),drawedCenterPoint.getY()-(centerPoint.getY() + delta.getY()));
             }
         }
-        if (this.isBorderTouched(line.getPoint1(), 20)) {
-            Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, line.getPoint1(), radius);
+        if (this.isBorderTouched(shortLine.getPoint1(), 20)) {
+            Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, shortLine.getPoint1(), radius);
             return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
         }
-        if (this.isBorderTouched(line.getPoint2(), 20)) {
-            Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, line.getPoint2(), radius);
+        if (this.isBorderTouched(shortLine.getPoint2(), 20)) {
+            Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, shortLine.getPoint2(), radius);
             return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
         }
         return null;

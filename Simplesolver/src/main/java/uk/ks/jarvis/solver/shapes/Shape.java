@@ -18,7 +18,7 @@ public interface Shape {
 
     public Point checkTouchWithOtherFigure(Circle circle);
 
-    public Point checkTouchWithOtherFigure(Line line);
+    public Point checkTouchWithOtherFigure(ShortLine shortLine);
 
     public void refreshCoordinates();
 

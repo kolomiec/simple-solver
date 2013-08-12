@@ -2,11 +2,12 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import uk.ks.jarvis.solver.beans.Point;
-import uk.ks.jarvis.solver.utils.StaticData;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.ks.jarvis.solver.beans.Point;
+import uk.ks.jarvis.solver.utils.StaticData;
 
 /**
  * Created by sayenko on 8/3/13.
@@ -28,17 +29,17 @@ public class ShapeList {
     }
 
     public Point checkTouch(Shape shape1, Shape shape2) {
-        if (((shape1.getClass()) == (Line.class)) && ((shape2.getClass()) == (Circle.class))) {
+        if (((shape1.getClass()) == (ShortLine.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
-        } else if (((shape1.getClass()) == (Line.class)) && ((shape2.getClass()) == (Line.class))) {
-            return shape1.checkTouchWithOtherFigure((Line) shape2);
+        } else if (((shape1.getClass()) == (ShortLine.class)) && ((shape2.getClass()) == (ShortLine.class))) {
+            return shape1.checkTouchWithOtherFigure((ShortLine) shape2);
 
         } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
-        } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (Line.class))) {
-            return shape1.checkTouchWithOtherFigure((Line) shape2);
+        } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (ShortLine.class))) {
+            return shape1.checkTouchWithOtherFigure((ShortLine) shape2);
         }
         return null;
     }
@@ -100,8 +101,8 @@ public class ShapeList {
             Point deltaPoint = shape.setFigureThatItWillNotBeOutsideTheScreen(maxX, maxY);
             if (deltaPoint != null) {
                 for (Shape shape1 : this.shapeList) {
-                    if (shape1.getClass() == Line.class) {
-                        ((Line) shape1).numberTouchedPoint = 0;
+                    if (shape1.getClass() == ShortLine.class) {
+                        ((ShortLine) shape1).numberTouchedPoint = 0;
                     }
                 }
                 changeCoordinatesToDelta(deltaPoint);
