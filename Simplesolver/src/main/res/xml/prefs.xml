@@ -16,7 +16,7 @@
             android:summary="Choose color theme"
             android:entries="@array/list"
             android:entryValues="@array/lValues"
-            android:defaultValue="1">
+            android:defaultValue="0">
 
     </ListPreference>
     </PreferenceCategory>

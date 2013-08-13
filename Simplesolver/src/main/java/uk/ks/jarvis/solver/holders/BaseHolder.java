@@ -219,6 +219,12 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     }
 
     private void refresh(Canvas canvas, Paint p) {
+        String s =sharedPrefs.getString("list", "-1");
+        if ((s.equals("2"))&&(ColorTheme.isLightTheme)){
+            ColorTheme.setDarkTheme();
+        } else if ((s.equals("1")&&(ColorTheme.isDarkTheme))) {
+            ColorTheme.setLightTheme();
+        }
         if (!coordinateSystemCreated) {
             setSystemInformation();
             coordinateSystem = new CoordinateSystem();
