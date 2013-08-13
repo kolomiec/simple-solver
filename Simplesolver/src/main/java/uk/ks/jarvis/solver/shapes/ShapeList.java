@@ -16,6 +16,10 @@ public class ShapeList {
     List<Shape> shapeList = new ArrayList<Shape>();
     private int color = 0;
 
+    public ShapeList() {
+        color = StaticData.getRandomColor();
+    }
+
     public ShapeList(Shape shape) {
         shapeList.add(shape);
         color = StaticData.getRandomColor();

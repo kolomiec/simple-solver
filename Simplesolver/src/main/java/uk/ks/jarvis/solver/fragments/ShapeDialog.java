@@ -8,10 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import uk.ks.jarvis.solver.R;
 import uk.ks.jarvis.solver.holders.BaseHolder;
-import uk.ks.jarvis.solver.shapes.*;
+import uk.ks.jarvis.solver.shapes.Circle;
+import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Shape;
+import uk.ks.jarvis.solver.shapes.ShapeList;
+import uk.ks.jarvis.solver.shapes.ShortLine;
+
+import static uk.ks.jarvis.solver.utils.StaticData.copyFigure;
 
 /**
  * Created by sayenko on 7/26/13.
@@ -20,6 +26,7 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
     private static Button btnCancel;
     private static TextView btnDelete;
     private static TextView btnColor;
+    private static TextView btnCopy;
     private static TextView btnUnMergeAll;
     private static TextView btnDisconnectFigure;
     private final BaseHolder baseHolder;
@@ -29,7 +36,7 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
 
     public ShapeDialog(BaseHolder baseHolder, ShapeList shapeList, Shape shape) {
         this.baseHolder = baseHolder;
-        this.touchedShape =shape;
+        this.touchedShape = shape;
         title = getTitle();
         this.shapeListWhichContainsTouchedShape = shapeList;
     }
@@ -74,6 +81,9 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
         btnColor = (TextView) view.findViewById(R.id.change_color);
         btnColor.setOnClickListener(this);
 
+        btnCopy = (TextView) view.findViewById(R.id.copy_figure);
+        btnCopy.setOnClickListener(this);
+
         btnCancel = (Button) view.findViewById(R.id.cancelButton);
         btnCancel.setOnClickListener(this);
 
@@ -97,12 +107,15 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
             shapeListWhichContainsTouchedShape.setRandomColor();
             baseHolder.invalidate();
             this.dismiss();
+        } else if (view.getId() == btnCopy.getId()) {
+            copyFigure(shapeListWhichContainsTouchedShape);
+            baseHolder.invalidate();
+            this.dismiss();
         } else if (view.getId() == btnCancel.getId()) {
             this.dismiss();
         } else if (shapeListWhichContainsTouchedShape.getShapeArray().size() > 1) {
             if (view.getId() == btnUnMergeAll.getId()) {
                 baseHolder.unMergeAllFigures(shapeListWhichContainsTouchedShape);
-                Toast.makeText(baseHolder.getContext(), "Figures were unmerged.", 150).show();
                 baseHolder.invalidate();
                 this.dismiss();
             }

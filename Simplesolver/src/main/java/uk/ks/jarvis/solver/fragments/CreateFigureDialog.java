@@ -8,14 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import uk.ks.jarvis.solver.R;
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
-import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.shapes.Shape;
+import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.utils.ShapeNameGenerator;
+import uk.ks.jarvis.solver.utils.StaticData;
 
 /**
  * Created by root on 7/28/13.
@@ -28,6 +30,7 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
     private TextView dotButton;
     private TextView circleButton;
     private TextView lineButton;
+    private TextView pasteButton;
 
     public CreateFigureDialog(BaseHolder baseHolder) {
         super();
@@ -36,9 +39,12 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.create_figure_dialog, container);
+        if (StaticData.isCopiedFigure) {
+            view = inflater.inflate(R.layout.create_and_paste_figure_dialog, container);
+        } else {
+            view = inflater.inflate(R.layout.create_figure_dialog, container);
+        }
         getDialog().setTitle("Select the figure to create");
-
         setupButtons();
         return view;
     }
@@ -52,7 +58,10 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
 
         lineButton = (TextView) view.findViewById(R.id.create_line);
         lineButton.setOnClickListener(this);
-
+        if (StaticData.isCopiedFigure) {
+            pasteButton = (TextView) view.findViewById(R.id.paste_figure);
+            pasteButton.setOnClickListener(this);
+        }
         btnCancel = (Button) view.findViewById(R.id.cancel_button);
         btnCancel.setOnClickListener(this);
     }
@@ -74,8 +83,15 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
             baseHolder.setCreateFigureMode(line);
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a line.", 50).show();
             this.dismiss();
+
         } else if (view.getId() == btnCancel.getId()) {
             this.dismiss();
+        } else if (StaticData.isCopiedFigure) {
+            if (pasteButton.getId() == view.getId()) {
+                baseHolder.addShape(StaticData.getCopiedFigure());
+                baseHolder.invalidate();
+                this.dismiss();
+            }
         }
     }
 }

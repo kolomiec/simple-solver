@@ -16,7 +16,6 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSystemInformation();
         setContentView(R.layout.activity_main);
     }
 
@@ -31,6 +30,7 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
     public boolean onTouch(View v, MotionEvent event) {
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_preferences_item) {
@@ -45,6 +45,7 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
     public boolean onLongClick(View v) {
         return true;
     }
+
     private void setSystemInformation() {
         DisplayMetrics displayMetrics = getBaseContext().getResources().getDisplayMetrics();
         SystemInformation.DISPLAY_WIDTH = displayMetrics.widthPixels;

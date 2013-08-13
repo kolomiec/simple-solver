@@ -219,10 +219,10 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     }
 
     private void refresh(Canvas canvas, Paint p) {
-        String s =sharedPrefs.getString("list", "-1");
-        if ((s.equals("2"))&&(ColorTheme.isLightTheme)){
+        String s = sharedPrefs.getString("list", "-1");
+        if ((s.equals("2")) && (ColorTheme.isLightTheme)) {
             ColorTheme.setDarkTheme();
-        } else if ((s.equals("1")&&(ColorTheme.isDarkTheme))) {
+        } else if ((s.equals("1") && (ColorTheme.isDarkTheme))) {
             ColorTheme.setLightTheme();
         }
         if (!coordinateSystemCreated) {
@@ -245,7 +245,7 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
         if (shapes.size() > 0) {
             canvas.drawText(shapes.get(FIRST_SHAPE_IN_LIST).toString(), 30, 15, p);
         }
-        if (sharedPrefs.getBoolean("checkBox", false)){
+        if (sharedPrefs.getBoolean("checkBox", false)) {
             coordinateSystem.draw(canvas);
         }
     }

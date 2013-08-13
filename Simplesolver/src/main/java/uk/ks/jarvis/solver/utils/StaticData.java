@@ -3,9 +3,15 @@ package uk.ks.jarvis.solver.utils;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import uk.ks.jarvis.solver.beans.Point;
 
 import java.util.Random;
+
+import uk.ks.jarvis.solver.beans.Point;
+import uk.ks.jarvis.solver.shapes.Circle;
+import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Shape;
+import uk.ks.jarvis.solver.shapes.ShapeList;
+import uk.ks.jarvis.solver.shapes.ShortLine;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,11 +21,40 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public class StaticData {
+    public static boolean isCopiedFigure = false;
+    private static ShapeList shapeList;
+
     public static Paint getLabelPaint(int color) {
         Paint labelPaint = new Paint();
         labelPaint.setColor(color);
         labelPaint.setTextSize(35.0f);
         return labelPaint;
+    }
+
+    public static void copyFigure(ShapeList shapes) {
+        shapeList = new ShapeList();
+        for (Shape shape : shapes.getShapeArray()) {
+            if (((shape.getClass()) == (ShortLine.class))) {
+                Shape line = new ShortLine(new Point(((ShortLine) shape).getPoint1()), new Point(((ShortLine) shape).getPoint2()), ShapeNameGenerator.getInstance().getNextName(),
+                        ShapeNameGenerator.getInstance().getNextName());
+                shapeList.getShapeArray().add(line);
+            } else if (((shape.getClass()) == (Circle.class))) {
+                Shape circle = new Circle((float) ((Circle) shape).getRadius(), new Point(((Circle) shape).getDrawedCenterPoint()), ShapeNameGenerator.getInstance().getNextName());
+                shapeList.getShapeArray().add(circle);
+            } else if (((shape.getClass()) == (Dot.class))) {
+                Shape dot = new Dot(new Point(((Dot) shape).getCoordinatesPoint()), ShapeNameGenerator.getInstance().getNextName());
+                shapeList.getShapeArray().add(dot);
+            }
+        }
+        isCopiedFigure = true;
+    }
+
+    public static ShapeList getCopiedFigure() {
+        if (isCopiedFigure) {
+            copyFigure(shapeList);
+            return shapeList;
+        }
+        return null;
     }
 
     public static int getRandomColor() {
