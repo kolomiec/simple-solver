@@ -130,6 +130,11 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             ((ShortLine) createShape).getPoint1().setY(motionEvent.getY());
             ((ShortLine) createShape).getPoint2().setX(motionEvent.getX());
             ((ShortLine) createShape).getPoint2().setY(motionEvent.getY());
+//        } else if (((createShape.getClass()) == (Line.class))) {
+//            ((Line) createShape).getPoint1().setX(motionEvent.getX());
+//            ((Line) createShape).getPoint1().setY(motionEvent.getY());
+//            ((Line) createShape).getPoint2().setX(motionEvent.getX());
+//            ((Line) createShape).getPoint2().setY(motionEvent.getY());
         } else if (((createShape.getClass()) == (Circle.class))) {
             ((Circle) createShape).getCoordinatesOfCenterPoint().setX(motionEvent.getX());
             ((Circle) createShape).getCoordinatesOfCenterPoint().setY(motionEvent.getY());

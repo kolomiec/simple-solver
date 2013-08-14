@@ -2,6 +2,7 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
 import uk.ks.jarvis.solver.beans.Point;
 
 /**
@@ -26,7 +27,7 @@ public interface Shape {
 
     public void setColor(int color);
 
-    public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX,float maxY);
+    public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY);
 
     public void changeCoordinatesToDelta(Point delta);
 

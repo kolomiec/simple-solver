@@ -2,6 +2,7 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.utils.StaticData;
 
@@ -37,14 +38,14 @@ public class Dot implements Shape {
 
     @Override
     public String toString() {
-        return "x:" + Math.round(point.getX()) + ", y:" + Math.round(point.getY());
+        return "Dot " + label + " - x:" + Math.round(point.getX()) + ", y:" + Math.round(point.getY());
     }
 
     @Override
     public void move(Point touchCoordinates, boolean onlyMove) {
-        setPoint(deltaTouchCoordinates,lastTouchCoordinates.getX() - touchCoordinates.getX(),lastTouchCoordinates.getY() - touchCoordinates.getY());
-        setPoint(this.point,this.point.getX() - deltaTouchCoordinates.getX(),this.point.getY() - deltaTouchCoordinates.getY());
-        setPoint(lastTouchCoordinates,touchCoordinates);
+        setPoint(deltaTouchCoordinates, lastTouchCoordinates.getX() - touchCoordinates.getX(), lastTouchCoordinates.getY() - touchCoordinates.getY());
+        setPoint(this.point, this.point.getX() - deltaTouchCoordinates.getX(), this.point.getY() - deltaTouchCoordinates.getY());
+        setPoint(lastTouchCoordinates, touchCoordinates);
     }
 
     public boolean isTouched(Point point) {
@@ -52,7 +53,7 @@ public class Dot implements Shape {
         if (betweenDelta) {
             boolean betweenDelta2 = (this.point.getY() < (point.getY() + delta.getY())) && (this.point.getY() > (point.getY() - delta.getY()));
             if (betweenDelta2) {
-                setPoint(lastTouchCoordinates,point);
+                setPoint(lastTouchCoordinates, point);
                 return true;
             }
         }
@@ -76,8 +77,8 @@ public class Dot implements Shape {
 
     @Override
     public void changeCoordinatesToDelta(Point delta) {
-        point.setX(point.getX()-delta.getX());
-        point.setY(point.getY()-delta.getY());
+        point.setX(point.getX() - delta.getX());
+        point.setY(point.getY() - delta.getY());
     }
 
     @Override

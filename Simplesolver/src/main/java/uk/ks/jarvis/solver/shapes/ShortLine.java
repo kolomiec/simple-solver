@@ -2,6 +2,7 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.utils.StaticData;
 
@@ -127,7 +128,7 @@ public class ShortLine implements Shape {
     @Override
     public Point checkTouchWithOtherFigure(Circle circle) {
         if (circle.isBorderTouched(this.getPoint1(), 20)) {
-            Point newCoordinates = circle.getCoordinates(this.point1);
+            Point newCoordinates = circle.getCoordinates(this.drawedPoint1);
             Point changedPoint1 = new Point(drawedPoint1);
             Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
@@ -143,9 +144,8 @@ public class ShortLine implements Shape {
                     break;
             }
             return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
-        }
-        if (circle.isBorderTouched(this.getPoint2(), 20)) {
-            Point newCoordinates = circle.getCoordinates(this.point2);
+        } else if (circle.isBorderTouched(this.getPoint2(), 20)) {
+            Point newCoordinates = circle.getCoordinates(this.drawedPoint2);
             Point changedPoint1 = new Point(drawedPoint1);
             Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
@@ -157,10 +157,10 @@ public class ShortLine implements Shape {
                 case 1:
                     break;
                 case 2:
-                    setPoint(changedPoint1, newCoordinates);
+                    setPoint(changedPoint2, newCoordinates);
                     break;
             }
-            return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
+            return new Point(drawedPoint2.getX() - changedPoint2.getX(), drawedPoint2.getY() - changedPoint2.getY());
         } else {
             Point p = this.getCoordinates(circle.getCoordinatesOfCenterPoint());
             if (this.isLineTouched(p)) {
@@ -210,10 +210,10 @@ public class ShortLine implements Shape {
                 case 1:
                     break;
                 case 2:
-                    setPoint(changedPoint1, newCoordinates);
+                    setPoint(changedPoint2, newCoordinates);
                     break;
             }
-            return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
+            return new Point(drawedPoint2.getX() - changedPoint2.getX(), drawedPoint2.getY() - changedPoint2.getY());
         }
         return null;
     }

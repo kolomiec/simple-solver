@@ -14,6 +14,7 @@ import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.utils.ShapeNameGenerator;
@@ -29,8 +30,9 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
     private View view;
     private TextView dotButton;
     private TextView circleButton;
-    private TextView lineButton;
+    private TextView shortLineButton;
     private TextView pasteButton;
+    private TextView lineButton;
 
     public CreateFigureDialog(BaseHolder baseHolder) {
         super();
@@ -56,6 +58,9 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
         circleButton = (TextView) view.findViewById(R.id.create_circle);
         circleButton.setOnClickListener(this);
 
+        shortLineButton = (TextView) view.findViewById(R.id.create_short_line);
+        shortLineButton.setOnClickListener(this);
+
         lineButton = (TextView) view.findViewById(R.id.create_line);
         lineButton.setOnClickListener(this);
         if (StaticData.isCopiedFigure) {
@@ -78,10 +83,15 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
             baseHolder.setCreateFigureMode(circle);
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a circle.", 50).show();
             this.dismiss();
+        } else if (shortLineButton.getId() == view.getId()) {
+            Shape shortLine = new ShortLine(new Point(0f, 0f), new Point(0f, 0f), ShapeNameGenerator.getInstance().getNextName(), ShapeNameGenerator.getInstance().getNextName());
+            baseHolder.setCreateFigureMode(shortLine);
+            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a відрізок.", 50).show();
+            this.dismiss();
         } else if (lineButton.getId() == view.getId()) {
-            Shape line = new ShortLine(new Point(0f, 0f), new Point(0f, 0f), ShapeNameGenerator.getInstance().getNextName(), ShapeNameGenerator.getInstance().getNextName());
+            Shape line = new Line(new Point(0f, 0f), new Point(0f, 0f), ShapeNameGenerator.getInstance().getNextName());
             baseHolder.setCreateFigureMode(line);
-            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a line.", 50).show();
+            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a пряма.", 50).show();
             this.dismiss();
 
         } else if (view.getId() == btnCancel.getId()) {

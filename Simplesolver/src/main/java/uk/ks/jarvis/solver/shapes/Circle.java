@@ -2,6 +2,7 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.utils.StaticData;
 
@@ -45,7 +46,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return "Circle "+label+" - x: " + Math.round(drawedCenterPoint.getX()) + ", y: " + Math.round(drawedCenterPoint.getY()) + ", radius: " + Math.round(radius);
+        return "Circle " + label + " - x: " + Math.round(drawedCenterPoint.getX()) + ", y: " + Math.round(drawedCenterPoint.getY()) + ", radius: " + Math.round(radius);
     }
 
     @Override
@@ -114,13 +115,13 @@ public class Circle implements Shape {
         } else if (drawedCenterPoint.getY() - radius < 0) {
             changedPoint.setY((float) radius);
         }
-        return new Point(initialPoint.getX()-changedPoint.getX(),initialPoint.getY()-changedPoint.getY());
+        return new Point(initialPoint.getX() - changedPoint.getX(), initialPoint.getY() - changedPoint.getY());
     }
 
     @Override
     public void changeCoordinatesToDelta(Point delta) {
-        drawedCenterPoint.setX(drawedCenterPoint.getX()-delta.getX());
-        drawedCenterPoint.setY(drawedCenterPoint.getY()-delta.getY());
+        drawedCenterPoint.setX(drawedCenterPoint.getX() - delta.getX());
+        drawedCenterPoint.setY(drawedCenterPoint.getY() - delta.getY());
     }
 
     @Override
@@ -145,7 +146,7 @@ public class Circle implements Shape {
         if (((length1) < (length2 + 15)) && ((length1) > (length2 - 15))) {
             this.getCoordinates(circle.getCoordinatesOfCenterPoint());
             Point newCoordinates = new Point(getCoordinatesOfBorderOfCircle(centerPoint, circle.getCoordinatesOfCenterPoint(), length2));
-            return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
+            return new Point(drawedCenterPoint.getX() - newCoordinates.getX(), drawedCenterPoint.getY() - newCoordinates.getY());
         }
         return null;
     }
@@ -158,16 +159,16 @@ public class Circle implements Shape {
             if (((length) < (this.radius + 15)) && ((length) > (this.radius - 15))) {
                 Point delta = new Point(this.getCoordinates(p));
                 setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
-                return new Point(drawedCenterPoint.getX()-(centerPoint.getX() + delta.getX()),drawedCenterPoint.getY()-(centerPoint.getY() + delta.getY()));
+                return new Point(drawedCenterPoint.getX() - (centerPoint.getX() + delta.getX()), drawedCenterPoint.getY() - (centerPoint.getY() + delta.getY()));
             }
         }
         if (this.isBorderTouched(shortLine.getPoint1(), 20)) {
             Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, shortLine.getPoint1(), radius);
-            return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
+            return new Point(drawedCenterPoint.getX() - newCoordinates.getX(), drawedCenterPoint.getY() - newCoordinates.getY());
         }
         if (this.isBorderTouched(shortLine.getPoint2(), 20)) {
             Point newCoordinates = getCoordinatesOfBorderOfCircle(centerPoint, shortLine.getPoint2(), radius);
-            return new Point(drawedCenterPoint.getX()-newCoordinates.getX(),drawedCenterPoint.getY()-newCoordinates.getY());
+            return new Point(drawedCenterPoint.getX() - newCoordinates.getX(), drawedCenterPoint.getY() - newCoordinates.getY());
         }
         return null;
     }

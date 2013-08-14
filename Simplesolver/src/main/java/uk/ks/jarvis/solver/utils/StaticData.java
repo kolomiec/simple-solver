@@ -24,13 +24,6 @@ public class StaticData {
     public static boolean isCopiedFigure = false;
     private static ShapeList shapeList;
 
-    public static Paint getLabelPaint(int color) {
-        Paint labelPaint = new Paint();
-        labelPaint.setColor(color);
-        labelPaint.setTextSize(35.0f);
-        return labelPaint;
-    }
-
     public static void copyFigure(ShapeList shapes) {
         shapeList = new ShapeList();
         for (Shape shape : shapes.getShapeArray()) {
@@ -57,6 +50,13 @@ public class StaticData {
         return null;
     }
 
+    public static Paint getLabelPaint(int color) {
+        Paint labelPaint = new Paint();
+        labelPaint.setColor(color);
+        labelPaint.setTextSize(35.0f);
+        return labelPaint;
+    }
+
     public static int getRandomColor() {
         Random rand = new Random();
         return Color.argb(250, rand.nextInt(156) + 50, rand.nextInt(156) + 50, rand.nextInt(156) + 50);
@@ -67,7 +67,7 @@ public class StaticData {
     }
 
     public static void drawTextWithShadow(Canvas canvas, String label, float x, float y) {
-        canvas.drawText(label, x + 1, y + 2, StaticData.getLabelPaint(Color.GRAY));
+        canvas.drawText(label, x + 1, y + 2, StaticData.getLabelPaint(Color.argb(100, 0, 0, 0)));
         canvas.drawText(label, x, y, StaticData.getLabelPaint(ColorTheme.LIGHT_COLOR));
     }
 

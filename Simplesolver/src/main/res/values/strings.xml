@@ -9,7 +9,8 @@
     </string>
     <string name="dot">Dot</string>
     <string name="circle">Circle</string>
-    <string name="shortLine">Line</string>
+    <string name="shortLine">Short line</string>
+    <string name="line">Line</string>
     <string name="cancelButton">Cancel</string>
     <string name="scale">Turn on/off scale</string>
     <string name="theme">Change color theme</string>
