@@ -128,7 +128,7 @@ public class ShortLine implements Shape {
     @Override
     public Point checkTouchWithOtherFigure(Circle circle) {
         if (circle.isBorderTouched(this.getPoint1(), 20)) {
-            Point newCoordinates = circle.getCoordinates(this.drawedPoint1);
+            Point newCoordinates = circle.getNewCoordinates(this.drawedPoint1);
             Point changedPoint1 = new Point(drawedPoint1);
             Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
@@ -145,7 +145,7 @@ public class ShortLine implements Shape {
             }
             return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
         } else if (circle.isBorderTouched(this.getPoint2(), 20)) {
-            Point newCoordinates = circle.getCoordinates(this.drawedPoint2);
+            Point newCoordinates = circle.getNewCoordinates(this.drawedPoint2);
             Point changedPoint1 = new Point(drawedPoint1);
             Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
@@ -162,11 +162,11 @@ public class ShortLine implements Shape {
             }
             return new Point(drawedPoint2.getX() - changedPoint2.getX(), drawedPoint2.getY() - changedPoint2.getY());
         } else {
-            Point p = this.getCoordinates(circle.getCoordinatesOfCenterPoint());
+            Point p = this.getNewCoordinates(circle.getCoordinatesOfCenterPoint());
             if (this.isLineTouched(p)) {
                 double length = getLengthBetweenTwoPoints(p, circle.getCoordinatesOfCenterPoint());
                 if (((length) < (circle.getRadius() + 15)) && ((length) > (circle.getRadius() - 15))) {
-                    Point delta = circle.getCoordinates(p);
+                    Point delta = circle.getNewCoordinates(p);
 
                     setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
                     return delta;
@@ -180,7 +180,7 @@ public class ShortLine implements Shape {
     public Point checkTouchWithOtherFigure(ShortLine shortLine) {
         if (shortLine.isLineTouched(this.getPoint1())) {
 
-            Point newCoordinates = shortLine.getCoordinates(this.point1);
+            Point newCoordinates = shortLine.getNewCoordinates(this.point1);
             Point changedPoint1 = new Point(drawedPoint1);
             Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
@@ -198,7 +198,7 @@ public class ShortLine implements Shape {
             return new Point(drawedPoint1.getX() - changedPoint1.getX(), drawedPoint1.getY() - changedPoint1.getY());
         }
         if (shortLine.isLineTouched(this.getPoint2())) {
-            Point newCoordinates = shortLine.getCoordinates(this.getPoint2());
+            Point newCoordinates = shortLine.getNewCoordinates(this.getPoint2());
             Point changedPoint1 = new Point(drawedPoint1);
             Point changedPoint2 = new Point(drawedPoint2);
             switch (this.getNumberOfSelectedPoint()) {
@@ -328,7 +328,7 @@ public class ShortLine implements Shape {
         setPoint(point2, point2.getX() - deltaTouchCoordinates.getX(), point2.getY() - deltaTouchCoordinates.getY());
     }
 
-    public Point getCoordinates(Point point) {
+    public Point getNewCoordinates(Point point) {
         float firstLineLength, secondLineLength, bigLineLength;
         firstLineLength = (float) StaticData.getLengthBetweenTwoPoints(this.point1, point);
         secondLineLength = (float) StaticData.getLengthBetweenTwoPoints(this.point2, point);

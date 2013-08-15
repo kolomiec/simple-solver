@@ -144,7 +144,7 @@ public class Circle implements Shape {
         double length2 = this.getRadius() + circle.getRadius();
 
         if (((length1) < (length2 + 15)) && ((length1) > (length2 - 15))) {
-            this.getCoordinates(circle.getCoordinatesOfCenterPoint());
+            this.getNewCoordinates(circle.getCoordinatesOfCenterPoint());
             Point newCoordinates = new Point(getCoordinatesOfBorderOfCircle(centerPoint, circle.getCoordinatesOfCenterPoint(), length2));
             return new Point(drawedCenterPoint.getX() - newCoordinates.getX(), drawedCenterPoint.getY() - newCoordinates.getY());
         }
@@ -153,11 +153,11 @@ public class Circle implements Shape {
 
     @Override
     public Point checkTouchWithOtherFigure(ShortLine shortLine) {
-        Point p = shortLine.getCoordinates(this.getCoordinatesOfCenterPoint());
+        Point p = shortLine.getNewCoordinates(this.getCoordinatesOfCenterPoint());
         if (shortLine.isLineTouched(p)) {
             double length = StaticData.getLengthBetweenTwoPoints(p, this.getCoordinatesOfCenterPoint());
             if (((length) < (this.radius + 15)) && ((length) > (this.radius - 15))) {
-                Point delta = new Point(this.getCoordinates(p));
+                Point delta = new Point(this.getNewCoordinates(p));
                 setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
                 return new Point(drawedCenterPoint.getX() - (centerPoint.getX() + delta.getX()), drawedCenterPoint.getY() - (centerPoint.getY() + delta.getY()));
             }
@@ -183,7 +183,7 @@ public class Circle implements Shape {
         return (length < radius + deltaRadius) && (length > radius - deltaRadius);
     }
 
-    public Point getCoordinates(Point point) {
+    public Point getNewCoordinates(Point point) {
         double radius2 = StaticData.getLengthBetweenTwoPoints(this.centerPoint, point);
         Float ratioOfTheRadii = (float) (radius / radius2);
 

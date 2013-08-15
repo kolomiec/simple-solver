@@ -11,6 +11,7 @@
           android:title="@string/shortLine"
           android:showAsAction="always"/>
     <item android:id="@+id/menu_preferences_item"
-          android:title="Preferences"
+          android:title="Settings"
+          android:icon="@android:drawable/ic_menu_preferences"
           android:showAsAction="always"/>
 </menu>

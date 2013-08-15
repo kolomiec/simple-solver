@@ -20,6 +20,7 @@ import uk.ks.jarvis.solver.fragments.CreateFigureDialog;
 import uk.ks.jarvis.solver.fragments.ShapeDialog;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
 import uk.ks.jarvis.solver.shapes.ShortLine;
@@ -130,11 +131,11 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             ((ShortLine) createShape).getPoint1().setY(motionEvent.getY());
             ((ShortLine) createShape).getPoint2().setX(motionEvent.getX());
             ((ShortLine) createShape).getPoint2().setY(motionEvent.getY());
-//        } else if (((createShape.getClass()) == (Line.class))) {
-//            ((Line) createShape).getPoint1().setX(motionEvent.getX());
-//            ((Line) createShape).getPoint1().setY(motionEvent.getY());
-//            ((Line) createShape).getPoint2().setX(motionEvent.getX());
-//            ((Line) createShape).getPoint2().setY(motionEvent.getY());
+        } else if (((createShape.getClass()) == (Line.class))) {
+            ((Line) createShape).getPoint1().setX(motionEvent.getX()-100);
+            ((Line) createShape).getPoint1().setY(motionEvent.getY()-100);
+            ((Line) createShape).getPoint2().setX(motionEvent.getX()+100);
+            ((Line) createShape).getPoint2().setY(motionEvent.getY()+100);
         } else if (((createShape.getClass()) == (Circle.class))) {
             ((Circle) createShape).getCoordinatesOfCenterPoint().setX(motionEvent.getX());
             ((Circle) createShape).getCoordinatesOfCenterPoint().setY(motionEvent.getY());
@@ -163,6 +164,10 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
             }
         }
         return shapeList;
+    }
+
+    public Point getFragmentWidthAndHeight() {
+        return new Point((float) getWidth(),(float) getHeight());
     }
 
     private void moveTouchedFigureToFirstPosition() {

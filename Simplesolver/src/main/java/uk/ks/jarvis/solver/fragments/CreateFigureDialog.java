@@ -89,9 +89,9 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a відрізок.", 50).show();
             this.dismiss();
         } else if (lineButton.getId() == view.getId()) {
-            Shape line = new Line(new Point(0f, 0f), new Point(0f, 0f), ShapeNameGenerator.getInstance().getNextName());
+            Shape line = new Line(new Point(0f, 100f), new Point(350f, 100f), ShapeNameGenerator.getInstance().getNextName(),baseHolder);
             baseHolder.setCreateFigureMode(line);
-            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a пряма.", 50).show();
+//            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a пряма.", 50).show();
             this.dismiss();
 
         } else if (view.getId() == btnCancel.getId()) {
