@@ -2,7 +2,6 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.utils.StaticData;
 
@@ -85,6 +84,21 @@ public class ShortLine implements Shape {
                             drawedPoint1.setY(point2.getY());
                         }
                     }
+                    float lengthX = Math.abs(point2.getX() - point1.getX());
+                    float lengthY = Math.abs(point2.getY() - point1.getY());
+                    if ((lengthX + 10 > lengthY) && (lengthX - 10 < lengthY)) {
+                        float delta = (lengthX + lengthY) / 2;
+                        if (point1.getX() > point2.getX()) {
+                            drawedPoint1.setX(point2.getX() + delta);
+                        } else {
+                            drawedPoint1.setX(point2.getX() - delta);
+                        }
+                        if (point1.getY() > point2.getY()) {
+                            drawedPoint1.setY(point2.getY() + delta);
+                        } else {
+                            drawedPoint1.setY(point2.getY() - delta);
+                        }
+                    }
                 }
                 break;
                 case 2: {
@@ -98,6 +112,21 @@ public class ShortLine implements Shape {
                         }
                         if (Math.abs(point1.getY() - point2.getY()) < 10) {
                             drawedPoint2.setY(point1.getY());
+                        }
+                    }
+                    float lengthX = Math.abs(point2.getX() - point1.getX());
+                    float lengthY = Math.abs(point2.getY() - point1.getY());
+                    if ((lengthX + 10 > lengthY) && (lengthX - 10 < lengthY)) {
+                        float delta = (lengthX + lengthY) / 2;
+                        if (point2.getX() > point1.getX()) {
+                            drawedPoint2.setX(point1.getX() + delta);
+                        } else {
+                            drawedPoint2.setX(point1.getX() - delta);
+                        }
+                        if (point2.getY() > point1.getY()) {
+                            drawedPoint2.setY(point1.getY() + delta);
+                        } else {
+                            drawedPoint2.setY(point1.getY() - delta);
                         }
                     }
                 }

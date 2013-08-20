@@ -2,13 +2,15 @@ package uk.ks.jarvis.solver.holders;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import uk.ks.jarvis.solver.shapes.ShapeList;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.ks.jarvis.solver.shapes.ShapeList;
 
 
 /**
@@ -31,8 +33,6 @@ public class Log extends View {
     public Log(Context context, FragmentActivity activity) {
         super(context);
 
-        this.setHorizontalFadingEdgeEnabled(true);
-        this.setVerticalFadingEdgeEnabled(false);
         this.context = context;
         this.activity = activity;
     }
@@ -43,6 +43,7 @@ public class Log extends View {
     }
 
     private void refresh(Canvas canvas, Paint p) {
+        p.setColor(Color.BLACK);
         canvas.drawText("I was here", 0, 15, p);
     }
 

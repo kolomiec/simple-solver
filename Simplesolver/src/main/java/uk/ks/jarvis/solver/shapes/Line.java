@@ -2,7 +2,6 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 import uk.ks.jarvis.solver.utils.StaticData;
@@ -33,7 +32,7 @@ public class Line extends ShortLine {
         setPoint(drawedPoint1, point1);
         setPoint(drawedPoint2, point2);
         color = StaticData.getRandomColor();
-        radius = (float) (1.1 * getLengthBetweenTwoPoints(new Point(0f, 0f), baseHolder.getFragmentWidthAndHeight()));
+        radius = (float) (1.01 * getLengthBetweenTwoPoints(new Point(0f, 0f), baseHolder.getFragmentWidthAndHeight()));
     }
 
     @Override
@@ -70,11 +69,11 @@ public class Line extends ShortLine {
                     point2 = new Point((2 * getCentralPoint().getX()) - point1.getX(), (2 * getCentralPoint().getY()) - point1.getY());
 
 
-                    if (Math.abs(point1.getX() - getCentralPoint().getX()) < 30) {
+                    if (Math.abs(point1.getX() - getCentralPoint().getX()) < 90) {
                         point1.setX(getCentralPoint().getX());
                         point2.setX(getCentralPoint().getX());
                     }
-                    if (Math.abs(point1.getY() - getCentralPoint().getY()) < 30) {
+                    if (Math.abs(point1.getY() - getCentralPoint().getY()) < 90) {
                         point1.setY(getCentralPoint().getY());
                         point2.setY(getCentralPoint().getY());
                     }
@@ -87,11 +86,11 @@ public class Line extends ShortLine {
                     point2 = changePointCoordinates(point);
                     point1 = new Point((2 * getCentralPoint().getX()) - point2.getX(), (2 * getCentralPoint().getY()) - point2.getY());
 
-                    if (Math.abs(point2.getX() - getCentralPoint().getX()) < 30) {
+                    if (Math.abs(point2.getX() - getCentralPoint().getX()) < 90) {
                         point1.setX(getCentralPoint().getX());
                         point2.setX(getCentralPoint().getX());
                     }
-                    if (Math.abs(point2.getY() - getCentralPoint().getY()) < 30) {
+                    if (Math.abs(point2.getY() - getCentralPoint().getY()) < 90) {
                         point1.setY(getCentralPoint().getY());
                         point2.setY(getCentralPoint().getY());
                     }

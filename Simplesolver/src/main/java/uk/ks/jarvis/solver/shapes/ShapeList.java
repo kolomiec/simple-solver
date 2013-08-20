@@ -42,7 +42,7 @@ public class ShapeList {
         } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
-        } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (ShortLine.class))) {
+        } else if (((shape1.getClass()) == (Circle.class)) && (((shape2.getClass()) == (ShortLine.class)) || ((shape2.getClass()) == (Line.class)))) {
             return shape1.checkTouchWithOtherFigure((ShortLine) shape2);
         }
         return null;
