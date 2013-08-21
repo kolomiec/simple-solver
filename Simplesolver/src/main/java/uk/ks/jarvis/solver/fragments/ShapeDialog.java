@@ -13,9 +13,9 @@ import uk.ks.jarvis.solver.R;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
-import uk.ks.jarvis.solver.shapes.ShortLine;
 
 import static uk.ks.jarvis.solver.utils.StaticData.copyFigure;
 
@@ -42,7 +42,7 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
     }
 
     private String getTitle() {
-        if (touchedShape.getClass() == (ShortLine.class)) {
+        if (touchedShape.getClass() == (Line.class)) {
             return "line";
         } else if (touchedShape.getClass() == (Circle.class)) {
             return "circle";

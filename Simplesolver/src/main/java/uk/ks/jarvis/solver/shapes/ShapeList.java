@@ -33,17 +33,17 @@ public class ShapeList {
     }
 
     public Point checkTouch(Shape shape1, Shape shape2) {
-        if (((shape1.getClass()) == (ShortLine.class)) && ((shape2.getClass()) == (Circle.class))) {
+        if (((shape1.getClass()) == (Line.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
-        } else if (((shape1.getClass()) == (ShortLine.class)) && ((shape2.getClass()) == (ShortLine.class))) {
-            return shape1.checkTouchWithOtherFigure((ShortLine) shape2);
+        } else if ((((shape1.getClass()) == (Line.class)) || ((shape1.getClass()) == (EndlessLine.class))) && (((shape2.getClass()) == (Line.class)) || ((shape2.getClass()) == (EndlessLine.class)))) {
+            return shape1.checkTouchWithOtherFigure((Line) shape2);
 
         } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
-        } else if (((shape1.getClass()) == (Circle.class)) && (((shape2.getClass()) == (ShortLine.class)) || ((shape2.getClass()) == (Line.class)))) {
-            return shape1.checkTouchWithOtherFigure((ShortLine) shape2);
+        } else if (((shape1.getClass()) == (Circle.class)) && (((shape2.getClass()) == (Line.class)) || ((shape2.getClass()) == (EndlessLine.class)))) {
+            return shape1.checkTouchWithOtherFigure((Line) shape2);
         }
         return null;
     }
@@ -105,8 +105,8 @@ public class ShapeList {
             Point deltaPoint = shape.setFigureThatItWillNotBeOutsideTheScreen(maxX, maxY);
             if (deltaPoint != null) {
                 for (Shape shape1 : this.shapeList) {
-                    if (shape1.getClass() == ShortLine.class) {
-                        ((ShortLine) shape1).numberTouchedPoint = 0;
+                    if (shape1.getClass() == Line.class) {
+                        ((Line) shape1).numberTouchedPoint = 0;
                     }
                 }
                 changeCoordinatesToDelta(deltaPoint);

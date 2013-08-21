@@ -19,7 +19,7 @@ public interface Shape {
 
     public Point checkTouchWithOtherFigure(Circle circle);
 
-    public Point checkTouchWithOtherFigure(ShortLine shortLine);
+    public Point checkTouchWithOtherFigure(Line line);
 
     public void refreshCoordinates();
 

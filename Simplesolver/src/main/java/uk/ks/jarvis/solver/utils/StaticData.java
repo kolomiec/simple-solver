@@ -9,9 +9,9 @@ import java.util.Random;
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
-import uk.ks.jarvis.solver.shapes.ShortLine;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,8 +27,8 @@ public class StaticData {
     public static void copyFigure(ShapeList shapes) {
         shapeList = new ShapeList();
         for (Shape shape : shapes.getShapeArray()) {
-            if (((shape.getClass()) == (ShortLine.class))) {
-                Shape line = new ShortLine(new Point(((ShortLine) shape).getPoint1()), new Point(((ShortLine) shape).getPoint2()), ShapeNameGenerator.getInstance().getNextName(),
+            if (((shape.getClass()) == (Line.class))) {
+                Shape line = new Line(new Point(((Line) shape).getPoint1()), new Point(((Line) shape).getPoint2()), ShapeNameGenerator.getInstance().getNextName(),
                         ShapeNameGenerator.getInstance().getNextName());
                 shapeList.getShapeArray().add(line);
             } else if (((shape.getClass()) == (Circle.class))) {

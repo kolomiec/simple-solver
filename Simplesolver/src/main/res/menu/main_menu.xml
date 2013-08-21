@@ -8,7 +8,7 @@
           android:title="@string/circle"
           android:showAsAction="always"/>
     <item android:id="@+id/Line"
-          android:title="@string/shortLine"
+          android:title="@string/line"
           android:showAsAction="always"/>
     <item android:id="@+id/menu_preferences_item"
           android:title="Settings"

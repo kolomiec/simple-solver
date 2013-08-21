@@ -20,10 +20,10 @@ import uk.ks.jarvis.solver.fragments.CreateFigureDialog;
 import uk.ks.jarvis.solver.fragments.ShapeDialog;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.EndlessLine;
 import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
-import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.utils.ColorTheme;
 
 
@@ -126,16 +126,16 @@ public class BaseHolder extends View implements View.OnTouchListener, View.OnLon
     }
 
     private void CreateNewFigureInCreateFigureMode(MotionEvent motionEvent) {
-        if (((createShape.getClass()) == (ShortLine.class))) {
-            ((ShortLine) createShape).getPoint1().setX(motionEvent.getX());
-            ((ShortLine) createShape).getPoint1().setY(motionEvent.getY());
-            ((ShortLine) createShape).getPoint2().setX(motionEvent.getX());
-            ((ShortLine) createShape).getPoint2().setY(motionEvent.getY());
-        } else if (((createShape.getClass()) == (Line.class))) {
-            ((Line) createShape).getPoint1().setX(motionEvent.getX()-100);
-            ((Line) createShape).getPoint1().setY(motionEvent.getY()-100);
-            ((Line) createShape).getPoint2().setX(motionEvent.getX()+100);
-            ((Line) createShape).getPoint2().setY(motionEvent.getY()+100);
+        if (((createShape.getClass()) == (Line.class))) {
+            ((Line) createShape).getPoint1().setX(motionEvent.getX());
+            ((Line) createShape).getPoint1().setY(motionEvent.getY());
+            ((Line) createShape).getPoint2().setX(motionEvent.getX());
+            ((Line) createShape).getPoint2().setY(motionEvent.getY());
+        } else if (((createShape.getClass()) == (EndlessLine.class))) {
+            ((EndlessLine) createShape).getPoint1().setX(motionEvent.getX()-100);
+            ((EndlessLine) createShape).getPoint1().setY(motionEvent.getY()-100);
+            ((EndlessLine) createShape).getPoint2().setX(motionEvent.getX()+100);
+            ((EndlessLine) createShape).getPoint2().setY(motionEvent.getY()+100);
         } else if (((createShape.getClass()) == (Circle.class))) {
             ((Circle) createShape).getCoordinatesOfCenterPoint().setX(motionEvent.getX());
             ((Circle) createShape).getCoordinatesOfCenterPoint().setY(motionEvent.getY());

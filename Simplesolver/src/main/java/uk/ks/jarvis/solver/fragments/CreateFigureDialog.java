@@ -14,9 +14,9 @@ import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 import uk.ks.jarvis.solver.shapes.Circle;
 import uk.ks.jarvis.solver.shapes.Dot;
+import uk.ks.jarvis.solver.shapes.EndlessLine;
 import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
-import uk.ks.jarvis.solver.shapes.ShortLine;
 import uk.ks.jarvis.solver.utils.ShapeNameGenerator;
 import uk.ks.jarvis.solver.utils.StaticData;
 
@@ -84,12 +84,12 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a circle.", 50).show();
             this.dismiss();
         } else if (shortLineButton.getId() == view.getId()) {
-            Shape shortLine = new ShortLine(new Point(0f, 0f), new Point(0f, 0f), ShapeNameGenerator.getInstance().getNextName(), ShapeNameGenerator.getInstance().getNextName());
+            Shape shortLine = new Line(new Point(0f, 0f), new Point(0f, 0f), ShapeNameGenerator.getInstance().getNextName(), ShapeNameGenerator.getInstance().getNextName());
             baseHolder.setCreateFigureMode(shortLine);
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a відрізок.", 50).show();
             this.dismiss();
         } else if (lineButton.getId() == view.getId()) {
-            Shape line = new Line(new Point(0f, 100f), new Point(350f, 100f), ShapeNameGenerator.getInstance().getNextName(),baseHolder);
+            Shape line = new EndlessLine(new Point(0f, 100f), new Point(350f, 100f), ShapeNameGenerator.getInstance().getNextName(),baseHolder);
             baseHolder.setCreateFigureMode(line);
 //            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a пряма.", 50).show();
             this.dismiss();
