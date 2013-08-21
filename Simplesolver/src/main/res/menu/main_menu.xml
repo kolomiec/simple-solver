@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/Dot"
-          android:title="@string/dot"
-          android:showAsAction="always"/>
-    <item android:id="@+id/Circle"
-          android:title="@string/circle"
-          android:showAsAction="always"/>
-    <item android:id="@+id/Line"
-          android:title="@string/line"
+    <item android:id="@+id/create_figure_item"
+          android:title="Create figure"
           android:showAsAction="always"/>
     <item android:id="@+id/menu_preferences_item"
           android:title="Settings"

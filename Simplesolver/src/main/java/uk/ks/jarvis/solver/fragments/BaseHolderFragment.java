@@ -52,17 +52,9 @@ public class BaseHolderFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.Dot:
-                CreateNewDotDialog createNewDotDialog = new CreateNewDotDialog((BaseHolder) baseHolder);
-                createNewDotDialog.show(this.getActivity().getSupportFragmentManager(), "");
-                return true;
-            case R.id.Circle:
-                CreateNewCircleDialog customDialogFragment = new CreateNewCircleDialog((BaseHolder) baseHolder);
-                customDialogFragment.show(this.getActivity().getSupportFragmentManager(), "");
-                return true;
-            case R.id.Line:
-                CreateNewLineDialog createNewLineDialog = new CreateNewLineDialog((BaseHolder) baseHolder);
-                createNewLineDialog.show(this.getActivity().getSupportFragmentManager(), "");
+            case R.id.create_figure_item:
+                CreateFigureDialog createFigureDialog = new CreateFigureDialog((BaseHolder) baseHolder);
+                createFigureDialog.show(this.getActivity().getSupportFragmentManager(), "");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
