@@ -86,7 +86,7 @@ public class ShortLine implements Shape {
                     }
                     float lengthX = Math.abs(point2.getX() - point1.getX());
                     float lengthY = Math.abs(point2.getY() - point1.getY());
-                    if ((lengthX + 10 > lengthY) && (lengthX - 10 < lengthY)) {
+                    if ((lengthX + 15 > lengthY) && (lengthX - 15 < lengthY)) {
                         float delta = (lengthX + lengthY) / 2;
                         if (point1.getX() > point2.getX()) {
                             drawedPoint1.setX(point2.getX() + delta);
@@ -116,7 +116,7 @@ public class ShortLine implements Shape {
                     }
                     float lengthX = Math.abs(point2.getX() - point1.getX());
                     float lengthY = Math.abs(point2.getY() - point1.getY());
-                    if ((lengthX + 10 > lengthY) && (lengthX - 10 < lengthY)) {
+                    if ((lengthX + 15 > lengthY) && (lengthX - 15 < lengthY)) {
                         float delta = (lengthX + lengthY) / 2;
                         if (point2.getX() > point1.getX()) {
                             drawedPoint2.setX(point1.getX() + delta);

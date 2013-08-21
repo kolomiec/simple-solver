@@ -79,6 +79,24 @@ public class Line extends ShortLine {
                     }
                     setPoint(drawedPoint1, point1);
                     setPoint(drawedPoint2, point2);
+                    float lengthX = Math.abs(getCentralPoint().getX() - point1.getX());
+                    float lengthY = Math.abs(getCentralPoint().getY() - point1.getY());
+                    if ((lengthX + 70 > lengthY) && (lengthX - 70 < lengthY)) {
+                        Point centralPoint = new Point(getCentralPoint());
+                        float delta = (lengthX + lengthY) / 2;
+                        if (point1.getX() > centralPoint.getX()) {
+                            drawedPoint1.setX(centralPoint.getX() + delta);
+
+                        } else {
+                            drawedPoint1.setX(centralPoint.getX() - delta);
+                        }
+                        if (point1.getY() > centralPoint.getY()) {
+                            drawedPoint1.setY(centralPoint.getY() + delta);
+                        } else {
+                            drawedPoint1.setY(centralPoint.getY() - delta);
+                        }
+                        drawedPoint2 = new Point((2 * centralPoint.getX()) - drawedPoint1.getX(), (2 * centralPoint.getY()) - drawedPoint1.getY());
+                    }
 
                 }
                 break;
@@ -96,6 +114,23 @@ public class Line extends ShortLine {
                     }
                     setPoint(drawedPoint1, point1);
                     setPoint(drawedPoint2, point2);
+                    float lengthX = Math.abs(point2.getX() - getCentralPoint().getX());
+                    float lengthY = Math.abs(point2.getY() - getCentralPoint().getY());
+                    if ((lengthX + 70 > lengthY) && (lengthX - 70 < lengthY)) {
+                        Point centralPoint = new Point(getCentralPoint());
+                        float delta = (lengthX + lengthY) / 2;
+                        if (point2.getX() > centralPoint.getX()) {
+                            drawedPoint2.setX(centralPoint.getX() + delta);
+                        } else {
+                            drawedPoint2.setX(centralPoint.getX() - delta);
+                        }
+                        if (point2.getY() > centralPoint.getY()) {
+                            drawedPoint2.setY(centralPoint.getY() + delta);
+                        } else {
+                            drawedPoint2.setY(centralPoint.getY() - delta);
+                        }
+                        drawedPoint1 = new Point((2 * centralPoint.getX()) - drawedPoint2.getX(), (2 * centralPoint.getY()) - drawedPoint2.getY());
+                    }
                 }
                 break;
             }
