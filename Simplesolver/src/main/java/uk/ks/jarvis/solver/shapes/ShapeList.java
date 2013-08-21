@@ -36,7 +36,7 @@ public class ShapeList {
         if (((shape1.getClass()) == (Line.class)) && ((shape2.getClass()) == (Circle.class))) {
             return shape1.checkTouchWithOtherFigure((Circle) shape2);
 
-        } else if ((((shape1.getClass()) == (Line.class)) || ((shape1.getClass()) == (EndlessLine.class))) && (((shape2.getClass()) == (Line.class)) || ((shape2.getClass()) == (EndlessLine.class)))) {
+        } else if (((shape1.getClass()) == (Line.class)) && (((shape2.getClass()) == (Line.class)) || ((shape2.getClass()) == (EndlessLine.class)))) {
             return shape1.checkTouchWithOtherFigure((Line) shape2);
 
         } else if (((shape1.getClass()) == (Circle.class)) && ((shape2.getClass()) == (Circle.class))) {

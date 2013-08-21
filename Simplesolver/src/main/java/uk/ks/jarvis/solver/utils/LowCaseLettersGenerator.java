@@ -10,17 +10,17 @@ import java.util.List;
  * Time: 15:57
  * To change this template use File | Settings | File Templates.
  */
-public class ShapeNameGenerator {
-    private static ShapeNameGenerator instance = new ShapeNameGenerator();
+public class LowCaseLettersGenerator {
+    private static LowCaseLettersGenerator instance = new LowCaseLettersGenerator();
     private List<String> englishLetters = new ArrayList<String>();
     private int digit = 0;
     private int nextIndexLetter = 0;
 
-    private ShapeNameGenerator() {
+    private LowCaseLettersGenerator() {
         fillEnglishLettersList();
     }
 
-    public synchronized static ShapeNameGenerator getInstance() {
+    public synchronized static LowCaseLettersGenerator getInstance() {
         return instance;
     }
 
@@ -33,7 +33,7 @@ public class ShapeNameGenerator {
     }
 
     private void fillEnglishLettersList() {
-        for (int i = 65; i <= 90; i++) {
+        for (int i = 97; i <= 122; i++) {
             englishLetters.add(new String(Character.toChars(i)));
         }
     }

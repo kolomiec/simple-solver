@@ -28,14 +28,14 @@ public class StaticData {
         shapeList = new ShapeList();
         for (Shape shape : shapes.getShapeArray()) {
             if (((shape.getClass()) == (Line.class))) {
-                Shape line = new Line(new Point(((Line) shape).getPoint1()), new Point(((Line) shape).getPoint2()), ShapeNameGenerator.getInstance().getNextName(),
-                        ShapeNameGenerator.getInstance().getNextName());
+                Shape line = new Line(new Point(((Line) shape).getPoint1()), new Point(((Line) shape).getPoint2()), UpCaseLettersGenerator.getInstance().getNextName(),
+                        UpCaseLettersGenerator.getInstance().getNextName());
                 shapeList.getShapeArray().add(line);
             } else if (((shape.getClass()) == (Circle.class))) {
-                Shape circle = new Circle((float) ((Circle) shape).getRadius(), new Point(((Circle) shape).getDrawedCenterPoint()), ShapeNameGenerator.getInstance().getNextName());
+                Shape circle = new Circle((float) ((Circle) shape).getRadius(), new Point(((Circle) shape).getDrawedCenterPoint()), UpCaseLettersGenerator.getInstance().getNextName());
                 shapeList.getShapeArray().add(circle);
             } else if (((shape.getClass()) == (Dot.class))) {
-                Shape dot = new Dot(new Point(((Dot) shape).getCoordinatesPoint()), ShapeNameGenerator.getInstance().getNextName());
+                Shape dot = new Dot(new Point(((Dot) shape).getCoordinatesPoint()), UpCaseLettersGenerator.getInstance().getNextName());
                 shapeList.getShapeArray().add(dot);
             }
         }
