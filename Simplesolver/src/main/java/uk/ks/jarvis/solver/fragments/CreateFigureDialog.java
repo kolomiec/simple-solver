@@ -19,7 +19,6 @@ import uk.ks.jarvis.solver.shapes.EndlessLine;
 import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.utils.LowCaseLettersGenerator;
-import uk.ks.jarvis.solver.utils.StaticData;
 import uk.ks.jarvis.solver.utils.UpCaseLettersGenerator;
 
 /**
@@ -33,7 +32,6 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
     private TextView dotButton;
     private TextView circleButton;
     private TextView lineButton;
-    private TextView pasteButton;
     private TextView endlessLineButton;
 
     public CreateFigureDialog(BaseHolder baseHolder) {
@@ -43,11 +41,8 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (StaticData.isCopiedFigure) {
-            view = inflater.inflate(R.layout.create_and_paste_figure_dialog, container);
-        } else {
-            view = inflater.inflate(R.layout.create_figure_dialog, container);
-        }
+        view = inflater.inflate(R.layout.create_figure_dialog, container);
+
         getDialog().setTitle("Select the figure to create");
         setupButtons();
         return view;
@@ -65,10 +60,7 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
 
         endlessLineButton = (TextView) view.findViewById(R.id.create_line);
         endlessLineButton.setOnClickListener(this);
-        if (StaticData.isCopiedFigure) {
-            pasteButton = (TextView) view.findViewById(R.id.paste_figure);
-            pasteButton.setOnClickListener(this);
-        }
+
         btnCancel = (Button) view.findViewById(R.id.cancel_button);
         btnCancel.setOnClickListener(this);
     }
@@ -86,24 +78,18 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a circle.", 50).show();
             this.dismiss();
         } else if (lineButton.getId() == view.getId()) {
-            Shape shortLine = new Line(new Point(0f, 0f), new Point(0f, 0f), UpCaseLettersGenerator.getInstance().getNextName(), UpCaseLettersGenerator.getInstance().getNextName());
-            baseHolder.setCreateFigureMode(shortLine);
-            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a відрізок.", 50).show();
+            Shape line = new Line(new Point(0f, 0f), new Point(0f, 0f), UpCaseLettersGenerator.getInstance().getNextName(), UpCaseLettersGenerator.getInstance().getNextName());
+            baseHolder.setCreateFigureMode(line);
+            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a line.", 50).show();
             this.dismiss();
         } else if (endlessLineButton.getId() == view.getId()) {
-            Shape line = new EndlessLine(new Point(0f, 0f), new Point((float) SystemInformation.DISPLAY_WIDTH, (float) SystemInformation.DISPLAY_HEIGHT), LowCaseLettersGenerator.getInstance().getNextName(),baseHolder);
-            baseHolder.setCreateFigureMode(line);
+            Shape endlessLine = new EndlessLine(new Point(0f, 0f), new Point((float) SystemInformation.DISPLAY_WIDTH, (float) SystemInformation.DISPLAY_HEIGHT), LowCaseLettersGenerator.getInstance().getNextName(), baseHolder);
+            baseHolder.setCreateFigureMode(endlessLine);
 //            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a пряма.", 50).show();
             this.dismiss();
 
         } else if (view.getId() == btnCancel.getId()) {
             this.dismiss();
-        } else if (StaticData.isCopiedFigure) {
-            if (pasteButton.getId() == view.getId()) {
-                baseHolder.addShape(StaticData.getCopiedFigure());
-                baseHolder.invalidate();
-                this.dismiss();
-            }
         }
     }
 }

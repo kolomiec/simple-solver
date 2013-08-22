@@ -3,6 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/create_figure_item"
           android:title="Create figure"
+          android:icon="@drawable/create_figure"
           android:showAsAction="always"/>
     <item android:id="@+id/menu_preferences_item"
           android:title="Settings"

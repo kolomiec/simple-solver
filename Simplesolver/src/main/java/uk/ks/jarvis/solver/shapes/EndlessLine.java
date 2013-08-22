@@ -2,6 +2,7 @@ package uk.ks.jarvis.solver.shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
 import uk.ks.jarvis.solver.beans.Point;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 import uk.ks.jarvis.solver.utils.StaticData;
@@ -32,7 +33,7 @@ public class EndlessLine extends Line {
         setPoint(drawedPoint1, point1);
         setPoint(drawedPoint2, point2);
         color = StaticData.getRandomColor();
-        radius = (float) (1.01 * getLengthBetweenTwoPoints(new Point(0f, 0f), baseHolder.getFragmentWidthAndHeight()));
+        radius = (float) (1.1 * getLengthBetweenTwoPoints(new Point(0f, 0f), baseHolder.getFragmentWidthAndHeight()));
     }
 
     @Override
@@ -278,11 +279,11 @@ public class EndlessLine extends Line {
 
     @Override
     public Point setFigureThatItWillNotBeOutsideTheScreen(float maxX, float maxY) {
-        return null;
-    }
-
-    @Override
-    public Point setDotThatItWillNotBeOutsideTheScreen(Point point, float maxX, float maxY) {
+//        if (getNumberOfSelectedPoint() == 0) {
+//            Point delta = setDotThatItWillNotBeOutsideTheScreen(getCentralPoint(), maxX, maxY);
+//            setPoint(drawedPoint1, drawedPoint1.getX() - delta.getX(), drawedPoint1.getY() - delta.getY());
+//            setPoint(drawedPoint2, drawedPoint2.getX() - delta.getX(), drawedPoint2.getY() - delta.getY());
+//        }
         return null;
     }
 
@@ -292,6 +293,12 @@ public class EndlessLine extends Line {
         drawedPoint1.setY(drawedPoint1.getY() - delta.getY());
         drawedPoint2.setX(drawedPoint2.getX() - delta.getX());
         drawedPoint2.setY(drawedPoint2.getY() - delta.getY());
+    }
+
+    @Override
+    public void refreshCoordinates() {
+        setPoint(point1, drawedPoint1);
+        setPoint(point2, drawedPoint2);
     }
 
     @Override
