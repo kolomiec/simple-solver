@@ -4,9 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import uk.ks.jarvis.solver.beans.Point;
-import uk.ks.jarvis.solver.utils.StaticData;
+import uk.ks.jarvis.solver.utils.BaseHelper;
 
-import static uk.ks.jarvis.solver.utils.StaticData.setPoint;
+import static uk.ks.jarvis.solver.utils.BaseHelper.setPoint;
 
 /**
  * Created by sayenko on 7/14/13.
@@ -25,7 +25,7 @@ public class Dot implements Shape {
     public Dot(Point point, String label) {
         this.point = point;
         this.label = label;
-        color = StaticData.getRandomColor();
+        color = BaseHelper.getRandomColor();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Dot implements Shape {
         paint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(point.getX(), point.getY(), radius, paint);
 
-        StaticData.drawTextWithShadow(canvas, label, point.getX() + radius, point.getY() + radius / 2);
+        BaseHelper.drawTextWithShadow(canvas, label, point.getX() + radius, point.getY() + radius / 2);
     }
 
     @Override

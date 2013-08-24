@@ -17,7 +17,7 @@ import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
 
-import static uk.ks.jarvis.solver.utils.StaticData.copyFigure;
+import static uk.ks.jarvis.solver.utils.BaseHelper.copyFigure;
 
 /**
  * Created by sayenko on 7/26/13.

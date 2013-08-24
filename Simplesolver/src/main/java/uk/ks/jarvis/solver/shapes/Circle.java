@@ -4,9 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import uk.ks.jarvis.solver.beans.Point;
-import uk.ks.jarvis.solver.utils.StaticData;
+import uk.ks.jarvis.solver.utils.BaseHelper;
 
-import static uk.ks.jarvis.solver.utils.StaticData.setPoint;
+import static uk.ks.jarvis.solver.utils.BaseHelper.setPoint;
 
 
 /**
@@ -29,11 +29,11 @@ public class Circle implements Shape {
         this.centerPoint = point;
         this.label = label;
         setPoint(drawedCenterPoint, point);
-        color = StaticData.getRandomColor();
+        color = BaseHelper.getRandomColor();
     }
 
     public static Point getCoordinatesOfBorderOfCircle(Point point, Point point2, double radius) {
-        float radius2 = (float) StaticData.getLengthBetweenTwoPoints(point2, point);
+        float radius2 = (float) BaseHelper.getLengthBetweenTwoPoints(point2, point);
 
         float ratioOfTheRadii = ((float) radius / radius2);
 
@@ -58,7 +58,7 @@ public class Circle implements Shape {
         paint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(drawedCenterPoint.getX(), drawedCenterPoint.getY(), 2, paint);
 
-        StaticData.drawTextWithShadow(canvas, label, drawedCenterPoint.getX() + 4, drawedCenterPoint.getY());
+        BaseHelper.drawTextWithShadow(canvas, label, drawedCenterPoint.getX() + 4, drawedCenterPoint.getY());
     }
 
     @Override
@@ -133,14 +133,14 @@ public class Circle implements Shape {
             radiusChangeMode = true;
             return true;
         } else {
-            double length = StaticData.getLengthBetweenTwoPoints(point, this.centerPoint);
+            double length = BaseHelper.getLengthBetweenTwoPoints(point, this.centerPoint);
             return (length < radius);
         }
     }
 
     @Override
     public Point checkTouchWithOtherFigure(Circle circle) {
-        double length1 = StaticData.getLengthBetweenTwoPoints(this.getCoordinatesOfCenterPoint(), circle.getCoordinatesOfCenterPoint());
+        double length1 = BaseHelper.getLengthBetweenTwoPoints(this.getCoordinatesOfCenterPoint(), circle.getCoordinatesOfCenterPoint());
         double length2 = this.getRadius() + circle.getRadius();
 
         if (((length1) < (length2 + 15)) && ((length1) > (length2 - 15))) {
@@ -155,7 +155,7 @@ public class Circle implements Shape {
     public Point checkTouchWithOtherFigure(Line line) {
         Point p = line.getNewCoordinates(this.getCoordinatesOfCenterPoint());
         if (line.isLineTouched(p)) {
-            double length = StaticData.getLengthBetweenTwoPoints(p, this.getCoordinatesOfCenterPoint());
+            double length = BaseHelper.getLengthBetweenTwoPoints(p, this.getCoordinatesOfCenterPoint());
             if (((length) < (this.radius + 15)) && ((length) > (this.radius - 15))) {
                 Point delta = new Point(this.getNewCoordinates(p));
                 setPoint(delta, p.getX() - delta.getX(), p.getY() - delta.getY());
@@ -179,12 +179,12 @@ public class Circle implements Shape {
     }
 
     public boolean isBorderTouched(Point point, int deltaRadius) {
-        double length = StaticData.getLengthBetweenTwoPoints(point, this.centerPoint);
+        double length = BaseHelper.getLengthBetweenTwoPoints(point, this.centerPoint);
         return (length < radius + deltaRadius) && (length > radius - deltaRadius);
     }
 
     public Point getNewCoordinates(Point point) {
-        double radius2 = StaticData.getLengthBetweenTwoPoints(this.centerPoint, point);
+        double radius2 = BaseHelper.getLengthBetweenTwoPoints(this.centerPoint, point);
         Float ratioOfTheRadii = (float) (radius / radius2);
 
         Point dotCoordinates = new Point(0f, 0f);
@@ -195,6 +195,6 @@ public class Circle implements Shape {
     }
 
     public void changeRadius(Point point) {
-        radius = StaticData.getLengthBetweenTwoPoints(this.centerPoint, point);
+        radius = BaseHelper.getLengthBetweenTwoPoints(this.centerPoint, point);
     }
 }

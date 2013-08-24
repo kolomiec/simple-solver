@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ks.jarvis.solver.beans.Point;
-import uk.ks.jarvis.solver.utils.StaticData;
+import uk.ks.jarvis.solver.utils.BaseHelper;
 
 /**
  * Created by sayenko on 8/3/13.
@@ -17,19 +17,19 @@ public class ShapeList {
     private int color = 0;
 
     public ShapeList() {
-        color = StaticData.getRandomColor();
+        color = BaseHelper.getRandomColor();
     }
 
     public ShapeList(Shape shape) {
         shapeList.add(shape);
-        color = StaticData.getRandomColor();
+        color = BaseHelper.getRandomColor();
     }
 
     public void setRandomColor() {
         if (shapeList.size() == 1) {
-            shapeList.get(0).setColor(StaticData.getRandomColor());
+            shapeList.get(0).setColor(BaseHelper.getRandomColor());
         } else
-            color = StaticData.getRandomColor();
+            color = BaseHelper.getRandomColor();
     }
 
     public Point checkTouch(Shape shape1, Shape shape2) {

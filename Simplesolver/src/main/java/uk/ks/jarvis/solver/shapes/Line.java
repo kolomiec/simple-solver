@@ -3,10 +3,10 @@ package uk.ks.jarvis.solver.shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import uk.ks.jarvis.solver.beans.Point;
-import uk.ks.jarvis.solver.utils.StaticData;
+import uk.ks.jarvis.solver.utils.BaseHelper;
 
-import static uk.ks.jarvis.solver.utils.StaticData.getLengthBetweenTwoPoints;
-import static uk.ks.jarvis.solver.utils.StaticData.setPoint;
+import static uk.ks.jarvis.solver.utils.BaseHelper.getLengthBetweenTwoPoints;
+import static uk.ks.jarvis.solver.utils.BaseHelper.setPoint;
 
 /**
  * Created by sayenko on 7/17/13.
@@ -33,7 +33,7 @@ public class Line implements Shape {
 
         setPoint(drawedPoint1, point1);
         setPoint(drawedPoint2, point2);
-        color = StaticData.getRandomColor();
+        color = BaseHelper.getRandomColor();
     }
 
     @Override
@@ -46,8 +46,8 @@ public class Line implements Shape {
         canvas.drawCircle(drawedPoint1.getX(), drawedPoint1.getY(), pointRadius, paint);
         canvas.drawCircle(drawedPoint2.getX(), drawedPoint2.getY(), pointRadius, paint);
 
-        StaticData.drawTextWithShadow(canvas, label1, drawedPoint1.getX() + pointRadius, drawedPoint1.getY() - pointRadius / 2);
-        StaticData.drawTextWithShadow(canvas, label2, drawedPoint2.getX() + pointRadius, drawedPoint2.getY() - pointRadius / 2);
+        BaseHelper.drawTextWithShadow(canvas, label1, drawedPoint1.getX() + pointRadius, drawedPoint1.getY() - pointRadius / 2);
+        BaseHelper.drawTextWithShadow(canvas, label2, drawedPoint2.getX() + pointRadius, drawedPoint2.getY() - pointRadius / 2);
     }
 
     @Override
@@ -254,7 +254,7 @@ public class Line implements Shape {
     }
 
     public boolean isLineTouched(Point point) {
-        return ((StaticData.getLengthBetweenTwoPoints(point1, point) + StaticData.getLengthBetweenTwoPoints(point2, point) - StaticData.getLengthBetweenTwoPoints(point1, point2)) < 3);
+        return ((BaseHelper.getLengthBetweenTwoPoints(point1, point) + BaseHelper.getLengthBetweenTwoPoints(point2, point) - BaseHelper.getLengthBetweenTwoPoints(point1, point2)) < 3);
     }
 
     public boolean isDotTouched(Point p1, Point p2) {
@@ -359,9 +359,9 @@ public class Line implements Shape {
 
     public Point getNewCoordinates(Point point) {
         float firstLineLength, secondLineLength, bigLineLength;
-        firstLineLength = (float) StaticData.getLengthBetweenTwoPoints(this.point1, point);
-        secondLineLength = (float) StaticData.getLengthBetweenTwoPoints(this.point2, point);
-        bigLineLength = (float) StaticData.getLengthBetweenTwoPoints(this.point1, this.point2);
+        firstLineLength = (float) BaseHelper.getLengthBetweenTwoPoints(this.point1, point);
+        secondLineLength = (float) BaseHelper.getLengthBetweenTwoPoints(this.point2, point);
+        bigLineLength = (float) BaseHelper.getLengthBetweenTwoPoints(this.point1, this.point2);
 
         float ao = (float) ((Math.pow(firstLineLength, 2) - Math.pow(secondLineLength, 2) + Math.pow(bigLineLength, 2)) / (2 * bigLineLength));
         float coefficient = bigLineLength / ao;
