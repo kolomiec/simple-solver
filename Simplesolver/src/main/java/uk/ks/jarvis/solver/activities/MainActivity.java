@@ -33,16 +33,6 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_preferences_item) {
-            startActivity(new Intent(this, PreferenceActivity.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onLongClick(View v) {
         return true;
     }

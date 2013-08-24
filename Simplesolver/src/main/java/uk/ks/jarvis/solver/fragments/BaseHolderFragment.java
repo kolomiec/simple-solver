@@ -1,6 +1,7 @@
 package uk.ks.jarvis.solver.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import uk.ks.jarvis.solver.R;
+import uk.ks.jarvis.solver.activities.PreferenceActivity;
 import uk.ks.jarvis.solver.holders.BaseHolder;
 
 /**
@@ -55,6 +57,9 @@ public class BaseHolderFragment extends Fragment {
             case R.id.create_figure_item:
                 CreateFigureDialog createFigureDialog = new CreateFigureDialog((BaseHolder) baseHolder);
                 createFigureDialog.show(this.getActivity().getSupportFragmentManager(), "");
+                return true;
+            case R.id.menu_preferences_item:
+                startActivity(new Intent(getActivity(), PreferenceActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
