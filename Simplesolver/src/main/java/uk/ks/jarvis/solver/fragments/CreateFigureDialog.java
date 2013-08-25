@@ -18,8 +18,7 @@ import uk.ks.jarvis.solver.shapes.Dot;
 import uk.ks.jarvis.solver.shapes.EndlessLine;
 import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
-import uk.ks.jarvis.solver.utils.LowCaseLettersGenerator;
-import uk.ks.jarvis.solver.utils.UpCaseLettersGenerator;
+import uk.ks.jarvis.solver.utils.LettersGenerator;
 
 /**
  * Created by root on 7/28/13.
@@ -68,22 +67,22 @@ public class CreateFigureDialog extends DialogFragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if (dotButton.getId() == view.getId()) {
-            Shape dot = new Dot(new Point(0f, 0f), UpCaseLettersGenerator.getInstance().getNextName());
+            Shape dot = new Dot(new Point(0f, 0f), LettersGenerator.getInstance().getNextUpperCaseName());
             baseHolder.setCreateFigureMode(dot);
             Toast.makeText(baseHolder.getContext(), "Touch the screen to draw a dot.", 50).show();
             this.dismiss();
         } else if (circleButton.getId() == view.getId()) {
-            Shape circle = new Circle(1f, new Point(0f, 0f), UpCaseLettersGenerator.getInstance().getNextName());
+            Shape circle = new Circle(1f, new Point(0f, 0f), LettersGenerator.getInstance().getNextUpperCaseName());
             baseHolder.setCreateFigureMode(circle);
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a circle.", 50).show();
             this.dismiss();
         } else if (lineButton.getId() == view.getId()) {
-            Shape line = new Line(new Point(0f, 0f), new Point(0f, 0f), UpCaseLettersGenerator.getInstance().getNextName(), UpCaseLettersGenerator.getInstance().getNextName());
+            Shape line = new Line(new Point(0f, 0f), new Point(0f, 0f), LettersGenerator.getInstance().getNextUpperCaseName(), LettersGenerator.getInstance().getNextUpperCaseName());
             baseHolder.setCreateFigureMode(line);
             Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a line.", 50).show();
             this.dismiss();
         } else if (endlessLineButton.getId() == view.getId()) {
-            Shape endlessLine = new EndlessLine(new Point(0f, 0f), new Point((float) SystemInformation.DISPLAY_WIDTH, (float) SystemInformation.DISPLAY_HEIGHT), LowCaseLettersGenerator.getInstance().getNextName(), baseHolder);
+            Shape endlessLine = new EndlessLine(new Point(0f, 0f), new Point((float) SystemInformation.DISPLAY_WIDTH, (float) SystemInformation.DISPLAY_HEIGHT), LettersGenerator.getInstance().getNextLowCaseName(), baseHolder);
             baseHolder.setCreateFigureMode(endlessLine);
 //            Toast.makeText(baseHolder.getContext(), "Drag your finger across the screen to draw a пряма.", 50).show();
             this.dismiss();
