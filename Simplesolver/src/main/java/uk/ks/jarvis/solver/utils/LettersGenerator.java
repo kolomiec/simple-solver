@@ -14,8 +14,10 @@ public class LettersGenerator {
     private static LettersGenerator instance = new LettersGenerator();
     private List<String> englishLowCaseLetters = new ArrayList<String>();
     private List<String> englishUpperCaseLetters = new ArrayList<String>();
-    private int digit = 0;
-    private int nextIndexLetter = 0;
+    private int upperCaseDigit = 0;
+    private int lowCaseDigit = 0;
+    private int nextIndexUpperCaseLetter = 0;
+    private int nextIndexLowCaseLetter = 0;
 
     private LettersGenerator() {
         fillLowCaseEnglishLettersList();
@@ -28,16 +30,16 @@ public class LettersGenerator {
 
     public String getNextUpperCaseName() {
         String nextName = getNextUpperCaseLetter();
-        if (digit > 0) {
-            return nextName.concat(Integer.toString(digit));
+        if (upperCaseDigit > 0) {
+            return nextName.concat(Integer.toString(upperCaseDigit));
         }
         return nextName;
     }
 
     public String getNextLowCaseName() {
         String nextName = getNextLowCaseLetter();
-        if (digit > 0) {
-            return nextName.concat(Integer.toString(digit));
+        if (lowCaseDigit > 0) {
+            return nextName.concat(Integer.toString(lowCaseDigit));
         }
         return nextName;
     }
@@ -55,22 +57,22 @@ public class LettersGenerator {
     }
 
     private String getNextUpperCaseLetter() {
-        if (nextIndexLetter < englishUpperCaseLetters.size()) {
-            return englishUpperCaseLetters.get(nextIndexLetter++);
+        if (nextIndexUpperCaseLetter < englishUpperCaseLetters.size()) {
+            return englishUpperCaseLetters.get(nextIndexUpperCaseLetter++);
         } else {
-            nextIndexLetter = 0;
-            digit++;
-            return englishUpperCaseLetters.get(nextIndexLetter++);
+            nextIndexUpperCaseLetter = 0;
+            upperCaseDigit++;
+            return englishUpperCaseLetters.get(nextIndexUpperCaseLetter++);
         }
     }
 
     private String getNextLowCaseLetter() {
-        if (nextIndexLetter < englishLowCaseLetters.size()) {
-            return englishLowCaseLetters.get(nextIndexLetter++);
+        if (nextIndexLowCaseLetter < englishLowCaseLetters.size()) {
+            return englishLowCaseLetters.get(nextIndexLowCaseLetter++);
         } else {
-            nextIndexLetter = 0;
-            digit++;
-            return englishLowCaseLetters.get(nextIndexLetter++);
+            nextIndexLowCaseLetter = 0;
+            lowCaseDigit++;
+            return englishLowCaseLetters.get(nextIndexLowCaseLetter++);
         }
     }
 }
