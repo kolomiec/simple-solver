@@ -17,7 +17,6 @@ import uk.ks.jarvis.solver.shapes.Line;
 import uk.ks.jarvis.solver.shapes.Shape;
 import uk.ks.jarvis.solver.shapes.ShapeList;
 
-import static uk.ks.jarvis.solver.utils.BaseHelper.copyFigure;
 
 /**
  * Created by sayenko on 7/26/13.
@@ -26,7 +25,6 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
     private static Button btnCancel;
     private static TextView btnDelete;
     private static TextView btnColor;
-    private static TextView btnCopy;
     private static TextView btnUnMergeAll;
     private static TextView btnDisconnectFigure;
     private final BaseHolder baseHolder;
@@ -81,9 +79,6 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
         btnColor = (TextView) view.findViewById(R.id.change_color);
         btnColor.setOnClickListener(this);
 
-        btnCopy = (TextView) view.findViewById(R.id.copy_figure);
-        btnCopy.setOnClickListener(this);
-
         btnCancel = (Button) view.findViewById(R.id.cancelButton);
         btnCancel.setOnClickListener(this);
 
@@ -105,10 +100,6 @@ public class ShapeDialog extends DialogFragment implements View.OnClickListener,
             this.dismiss();
         } else if (view.getId() == btnColor.getId()) {
             shapeListWhichContainsTouchedShape.setRandomColor();
-            baseHolder.invalidate();
-            this.dismiss();
-        } else if (view.getId() == btnCopy.getId()) {
-            copyFigure(shapeListWhichContainsTouchedShape);
             baseHolder.invalidate();
             this.dismiss();
         } else if (view.getId() == btnCancel.getId()) {
